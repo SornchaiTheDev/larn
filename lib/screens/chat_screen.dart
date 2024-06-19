@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:larn/widgets/bottom_navigation_widget.dart';
 
 class ChatScreen extends StatelessWidget {
   const ChatScreen({super.key});
@@ -10,7 +9,6 @@ class ChatScreen extends StatelessWidget {
       body: Column(
         children: [
           SizedBox(height: 40),
-          BottomNavigationWidget(),
         ],
       ),
     );

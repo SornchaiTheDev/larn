@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:larn/screens/bottom_navigation_screen.dart';
 import 'package:larn/screens/chat_screen.dart';
 import 'package:larn/screens/home_screen.dart';
 
@@ -18,7 +19,7 @@ class App extends StatelessWidget {
         fontFamily: GoogleFonts.prompt().fontFamily,
       ),
       routes: {
-        '/': (context) => const HomeScreen(),
+        '/': (context) => const BottomNavigationScreen(),
         '/chats': (context) => const ChatScreen(),
       },
       initialRoute: "/",
