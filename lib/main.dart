@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:larn/screens/chat_screen.dart';
 import 'package:larn/screens/home_screen.dart';
 
 void main() {
@@ -18,6 +19,7 @@ class App extends StatelessWidget {
       ),
       routes: {
         '/': (context) => const HomeScreen(),
+        '/chats': (context) => const ChatScreen(),
       },
       initialRoute: "/",
     );
