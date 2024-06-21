@@ -13,19 +13,24 @@ class ChatScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Padding(
-              padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Text("คุยกับหลาน", style: TextStyle(fontSize: 24)),
-                  Row(
-                    children: [
-                      FaIcon(FontAwesomeIcons.userPlus),
-                      SizedBox(width: 8),
-                      Text("เพิ่มหลาน", style: TextStyle(fontSize: 16)),
-                    ],
+                  const Text("คุยกับหลาน", style: TextStyle(fontSize: 24)),
+                  InkWell(
+                    onTap: () {
+                      Navigator.pushNamed(context, "/add-larn");
+                    },
+                    child: const Row(
+                      children: [
+                        FaIcon(FontAwesomeIcons.userPlus),
+                        SizedBox(width: 8),
+                        Text("เพิ่มหลาน", style: TextStyle(fontSize: 16)),
+                      ],
+                    ),
                   )
                 ],
               ),
