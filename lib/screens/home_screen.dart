@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:larn/widgets/bottom_navigation_widget.dart';
 import 'package:larn/widgets/header_widget.dart';
 import 'package:larn/widgets/larn_content_widget.dart';
 
