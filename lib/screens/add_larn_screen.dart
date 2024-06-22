@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:larn/constants/colors.dart';
+import 'package:larn/widgets/back_button_widget.dart';
 
 class AddLarnScreen extends StatelessWidget {
   const AddLarnScreen({super.key});
@@ -11,31 +12,22 @@ class AddLarnScreen extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: [
-            Padding(
-              padding: const EdgeInsets.all(16.0),
+            const Padding(
+              padding: EdgeInsets.all(16.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Expanded(
-                    child: InkWell(
-                      onTap: () {},
-                      child: const Row(
-                        children: [
-                          FaIcon(FontAwesomeIcons.chevronLeft),
-                          SizedBox(width: 12),
-                          Text("ย้อนกลับ")
-                        ],
-                      ),
-                    ),
+                    child: BackButtonWidget(),
                   ),
-                  const Text(
+                  Text(
                     "เพิ่มหลาน",
                     style: TextStyle(
                       fontSize: 22,
                     ),
                   ),
-                  const Expanded(
+                  Expanded(
                     child: SizedBox(
                       width: 10,
                     ),

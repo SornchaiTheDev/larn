@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:larn/screens/add_larn_screen.dart';
 import 'package:larn/screens/bottom_navigation_screen.dart';
 import 'package:larn/screens/chat_screen.dart';
+import 'package:larn/screens/settings_screen.dart';
 
 void main() {
   runApp(const App());
@@ -22,6 +23,7 @@ class App extends StatelessWidget {
         '/': (context) => const BottomNavigationScreen(),
         '/chats': (context) => const ChatScreen(),
         "/add-larn": (context) => const AddLarnScreen(),
+        "/settings": (context) => const SettingsScreen(),
       },
       initialRoute: "/",
     );

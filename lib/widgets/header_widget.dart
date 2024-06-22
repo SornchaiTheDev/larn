@@ -17,7 +17,7 @@ class HeaderWidget extends StatelessWidget {
         ),
         InkWell(
           onTap: () {
-            print("HELLO WORLD");
+            Navigator.pushNamed(context, "/settings");
           },
           child: const Padding(
             padding: EdgeInsets.all(8.0),
