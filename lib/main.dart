@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:larn/screens/add_larn_screen.dart';
 import 'package:larn/screens/bottom_navigation_screen.dart';
 import 'package:larn/screens/call_screen.dart';
-import 'package:larn/screens/chat_screen.dart';
+import 'package:larn/screens/chats_screen.dart';
 import 'package:larn/screens/settings_screen.dart';
 
 void main() {
@@ -22,12 +22,12 @@ class App extends StatelessWidget {
       ),
       routes: {
         '/': (context) => const BottomNavigationScreen(),
-        '/chats': (context) => const ChatScreen(),
+        '/chats': (context) => const ChatsScreen(),
         "/add-larn": (context) => const AddLarnScreen(),
         "/settings": (context) => const SettingsScreen(),
         "/call": (context) => const CallScreen(),
       },
-      initialRoute: "/call",
+      initialRoute: "/",
     );
   }
 }
