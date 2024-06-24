@@ -77,7 +77,7 @@ class ChatScreen extends StatelessWidget {
                   children: const [
                     SizedBox(height: 16),
                     ChatBubbleWidget(
-                      side: Side.left,
+                      side: BubbleSide.left,
                       text:
                           """Yes, it is possible to send sensor data from an Apple Watch to an Apple Watch app. Here’s a general outline of how you can achieve this:
   1.	Accessing Sensor Data:
@@ -92,9 +92,15 @@ class ChatScreen extends StatelessWidget {
                     ),
                     SizedBox(height: 24),
                     ChatBubbleWidget(
-                        side: Side.right,
-                        text:
-                            "Is it possible to send sensor data from apple watch to apple watch app"),
+                      side: BubbleSide.right,
+                      text:
+                          "Is it possible to send sensor data from apple watch to apple watch app",
+                    ),
+                    SizedBox(height: 24),
+                    MediaBubbleWidget(
+                        side: BubbleSide.left,
+                        src:
+                            "https://m.media-amazon.com/images/M/MV5BOGUyZDUxZjEtMmIzMC00MzlmLTg4MGItZWJmMzBhZjE0Mjc1XkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_.jpg")
                   ],
                 ),
               ),
@@ -153,27 +159,29 @@ class ChatScreen extends StatelessWidget {
   }
 }
 
-enum Side { left, right }
+enum BubbleSide { left, right }
 
-class ChatBubbleWidget extends StatelessWidget {
-  const ChatBubbleWidget({
+enum BubbleType { chat, media }
+
+class MediaBubbleWidget extends StatelessWidget {
+  const MediaBubbleWidget({
     super.key,
     required this.side,
-    required this.text,
+    required this.src,
   });
 
-  final Side side;
-  final String text;
+  final BubbleSide side;
+  final String src;
 
   @override
   Widget build(BuildContext context) {
-    bool isLeftSide = side == Side.left;
+    bool isLeftSide = side == BubbleSide.left;
 
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Visibility(
-          visible: side == Side.left,
+          visible: side == BubbleSide.left,
           child: const CircleAvatar(
             radius: 20,
             backgroundImage: AssetImage("assets/images/larn1.png"),
@@ -196,7 +204,88 @@ class ChatBubbleWidget extends StatelessWidget {
             clipBehavior: Clip.none,
             children: [
               Positioned(
-                left: isLeftSide ? -4 : null,
+                left: isLeftSide ? -3 : null,
+                top: 6,
+                right: isLeftSide ? null : 8,
+                child: Transform.rotate(
+                  angle: 40,
+                  child: Container(
+                    width: 24,
+                    height: 32,
+                    decoration: const BoxDecoration(
+                      color: Colors.black,
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(4.0),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.only(
+                  right: isLeftSide ? 32 : 12,
+                ),
+                padding: const EdgeInsets.all(10.0),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(10.0),
+                  border: Border.all(
+                    width: 1,
+                    color: Colors.black,
+                  ),
+                ),
+                child: Image.network(src),
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class ChatBubbleWidget extends StatelessWidget {
+  const ChatBubbleWidget({
+    super.key,
+    required this.side,
+    required this.text,
+  });
+
+  final BubbleSide side;
+  final String text;
+
+  @override
+  Widget build(BuildContext context) {
+    bool isLeftSide = side == BubbleSide.left;
+
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Visibility(
+          visible: side == BubbleSide.left,
+          child: const CircleAvatar(
+            radius: 20,
+            backgroundImage: AssetImage("assets/images/larn1.png"),
+          ),
+        ),
+        const SizedBox(
+          width: 16,
+        ),
+        Visibility(
+          visible: !isLeftSide,
+          child: const Expanded(
+            child: SizedBox(
+              width: 1,
+            ),
+          ),
+        ),
+        Flexible(
+          flex: 5,
+          child: Stack(
+            clipBehavior: Clip.none,
+            children: [
+              Positioned(
+                left: isLeftSide ? -3 : null,
                 top: 6,
                 right: isLeftSide ? null : 8,
                 child: Transform.rotate(
