@@ -13,7 +13,7 @@ class BackButtonWidget extends StatelessWidget {
         Navigator.pop(context);
       },
       child: Ink(
-        width: 100,
+        width: 120,
         padding: const EdgeInsets.all(10.0),
         decoration: const BoxDecoration(
           borderRadius: BorderRadius.all(
