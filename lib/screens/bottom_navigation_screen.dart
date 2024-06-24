@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:larn/screens/call_larn_screen.dart';
 import 'package:larn/screens/chats_screen.dart';
 import 'package:larn/screens/home_screen.dart';
 import 'package:larn/widgets/bottom_navigation_widget.dart';
@@ -14,6 +15,7 @@ class _BottomNavigationScreenState extends State<BottomNavigationScreen> {
   final List<Widget> screens = [
     const HomeScreen(),
     const ChatsScreen(),
+    const CallLarnScreen(),
   ];
 
   int currentIndex = 0;

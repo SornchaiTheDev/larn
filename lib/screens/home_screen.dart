@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:larn/widgets/app_content_widget.dart';
 import 'package:larn/widgets/header_widget.dart';
-import 'package:larn/widgets/larn_content_widget.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -21,10 +21,10 @@ class HomeScreen extends StatelessWidget {
             flex: 1,
             child: Padding(
               padding: EdgeInsets.all(20.0),
-              child: LarnContentWidget(),
+              child: AppContentWidget(),
             ),
           ),
-          SizedBox(height: 40),
+          SizedBox(height: 10),
         ],
       ),
     );

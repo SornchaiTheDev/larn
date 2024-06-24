@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:larn/screens/add_larn_screen.dart';
 import 'package:larn/screens/bottom_navigation_screen.dart';
+import 'package:larn/screens/call_larn_screen.dart';
 import 'package:larn/screens/call_screen.dart';
 import 'package:larn/screens/chat_other_screen.dart';
 import 'package:larn/screens/chat_screen.dart';
@@ -31,8 +32,9 @@ class App extends StatelessWidget {
         "/settings": (context) => const SettingsScreen(),
         "/call": (context) => const CallScreen(),
         "/chat-other": (context) => const ChatOtherScreen(),
+        "/call-larn": (context) => const CallLarnScreen(),
       },
-      initialRoute: "/chat",
+      initialRoute: "/",
     );
   }
 }
