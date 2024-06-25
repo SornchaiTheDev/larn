@@ -11,12 +11,13 @@ class BottomNavigationWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Ink(
-          height: 160,
-          color: Colors.white,
-          child: Row(
+    return Positioned(
+      bottom: 0,
+      left: 0,
+      right: 0,
+      child: Stack(
+        children: [
+          Row(
             children: [
               Expanded(
                 child: Transform.translate(
@@ -82,48 +83,48 @@ class BottomNavigationWidget extends StatelessWidget {
               ),
             ],
           ),
-        ),
-        Positioned(
-          left: 0,
-          right: 0,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              InkWell(
-                onTap: () => onTap(2),
-                borderRadius: BorderRadius.circular(100),
-                child: Transform.translate(
-                  offset: const Offset(0, 0),
-                  child: Ink(
-                    width: 100,
-                    height: 100,
-                    decoration: BoxDecoration(
-                      color: primaryColor,
-                      borderRadius: BorderRadius.circular(100),
-                      border: Border.all(
-                        color: Colors.white,
-                        width: 6,
-                        strokeAlign: BorderSide.strokeAlignOutside,
+          Positioned(
+            left: 0,
+            right: 0,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                InkWell(
+                  onTap: () => onTap(2),
+                  borderRadius: BorderRadius.circular(100),
+                  child: Transform.translate(
+                    offset: const Offset(0, 0),
+                    child: Ink(
+                      width: 100,
+                      height: 100,
+                      decoration: BoxDecoration(
+                        color: primaryColor,
+                        borderRadius: BorderRadius.circular(100),
+                        border: Border.all(
+                          color: Colors.white,
+                          width: 6,
+                          strokeAlign: BorderSide.strokeAlignOutside,
+                        ),
+                      ),
+                      child: const Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          FaIcon(
+                            FontAwesomeIcons.person,
+                            size: 38,
+                          ),
+                          Text("เรียกหลาน"),
+                        ],
                       ),
                     ),
-                    child: const Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        FaIcon(
-                          FontAwesomeIcons.person,
-                          size: 38,
-                        ),
-                        Text("เรียกหลาน"),
-                      ],
-                    ),
                   ),
-                ),
-              )
-            ],
+                )
+              ],
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

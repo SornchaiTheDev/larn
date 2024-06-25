@@ -3,11 +3,20 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:larn/widgets/home_content_widget.dart';
 
 class AppContentWidget extends StatelessWidget {
-  const AppContentWidget({super.key});
+  const AppContentWidget({
+    super.key,
+    required this.onNext,
+    required this.onPrev,
+  });
+
+  final VoidCallback onPrev;
+  final VoidCallback onNext;
 
   @override
   Widget build(BuildContext context) {
     return HomeContentWidget(
+      onNext: onNext,
+      onPrev: onPrev,
       topLeft: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

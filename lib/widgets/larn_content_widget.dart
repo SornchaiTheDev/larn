@@ -4,11 +4,20 @@ import 'package:larn/constants/colors.dart';
 import 'package:larn/widgets/home_content_widget.dart';
 
 class LarnContentWidget extends StatelessWidget {
-  const LarnContentWidget({super.key});
+  const LarnContentWidget({
+    super.key,
+    required this.onNext,
+    required this.onPrev,
+  });
+
+  final VoidCallback onPrev;
+  final VoidCallback onNext;
 
   @override
   Widget build(BuildContext context) {
     return HomeContentWidget(
+      onNext: onNext,
+      onPrev: onPrev,
       topLeft: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

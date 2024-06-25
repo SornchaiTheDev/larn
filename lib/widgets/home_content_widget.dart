@@ -7,10 +7,15 @@ class HomeContentWidget extends StatelessWidget {
     super.key,
     required this.topLeft,
     required this.content,
+    required this.onNext,
+    required this.onPrev,
   });
 
   final Widget topLeft;
   final Widget content;
+
+  final VoidCallback onNext;
+  final VoidCallback onPrev;
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +66,7 @@ class HomeContentWidget extends StatelessWidget {
                         borderRadius: const BorderRadius.only(
                           bottomLeft: Radius.circular(10),
                         ),
-                        onTap: () {},
+                        onTap: onPrev,
                         title: "ก่อนหน้า"),
                   ),
                   Flexible(
@@ -74,7 +79,7 @@ class HomeContentWidget extends StatelessWidget {
                           bottomLeft: Radius.circular(10),
                           bottomRight: Radius.circular(10),
                         ),
-                        onTap: () {},
+                        onTap: onNext,
                         title: "ถัดไป"),
                   ),
                 ],
