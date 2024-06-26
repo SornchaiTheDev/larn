@@ -14,7 +14,7 @@ class ChatScreen extends StatelessWidget {
         child: Column(
           children: [
             Container(
-              padding: const EdgeInsets.only(bottom: 12.0),
+              padding: const EdgeInsets.fromLTRB(12.0, 0.0, 12.0, 6.0),
               decoration: const BoxDecoration(
                 border: Border(
                   bottom: BorderSide(
@@ -71,7 +71,7 @@ class ChatScreen extends StatelessWidget {
                 ],
               ),
             ),
-            Expanded(
+            const Expanded(
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(12.0, 0, 12.0, 0),
                 child: SingleChildScrollView(

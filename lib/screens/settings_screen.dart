@@ -17,10 +17,9 @@ class SettingsScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Expanded(
-                    child: BackButtonWidget(),
-                  ),
+                  BackButtonWidget(),
                   Row(
                     children: [
                       FaIcon(FontAwesomeIcons.gear),

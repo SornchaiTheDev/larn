@@ -8,24 +8,25 @@ class BackButtonWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {
-        Navigator.pop(context);
-      },
-      child: Ink(
-        width: 120,
-        padding: const EdgeInsets.all(10.0),
-        decoration: const BoxDecoration(
-          borderRadius: BorderRadius.all(
-            Radius.circular(10.0),
+    return IntrinsicWidth(
+      child: InkWell(
+        onTap: () {
+          Navigator.pop(context);
+        },
+        child: Ink(
+          padding: const EdgeInsets.all(10.0),
+          decoration: const BoxDecoration(
+            borderRadius: BorderRadius.all(
+              Radius.circular(10.0),
+            ),
           ),
-        ),
-        child: const Row(
-          children: [
-            FaIcon(FontAwesomeIcons.chevronLeft),
-            SizedBox(width: 12),
-            Text("ย้อนกลับ")
-          ],
+          child: const Row(
+            children: [
+              FaIcon(FontAwesomeIcons.chevronLeft),
+              SizedBox(width: 12),
+              Text("ย้อนกลับ")
+            ],
+          ),
         ),
       ),
     );
