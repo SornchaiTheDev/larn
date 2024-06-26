@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:larn/widgets/action_button_widget.dart';
 
 class CallScreen extends StatelessWidget {
   const CallScreen({super.key});
@@ -82,54 +83,6 @@ class CallScreen extends StatelessWidget {
           ],
         ),
       ),
-    );
-  }
-}
-
-class ActionButtonWidget extends StatelessWidget {
-  const ActionButtonWidget({
-    super.key,
-    required this.icon,
-    required this.title,
-    required this.onTap,
-  });
-
-  final String title;
-  final Widget icon;
-  final VoidCallback onTap;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        InkWell(
-          onTap: () {},
-          borderRadius: const BorderRadius.all(
-            Radius.circular(100.0),
-          ),
-          child: Ink(
-            width: 80,
-            height: 80,
-            padding: const EdgeInsets.all(10.0),
-            decoration: BoxDecoration(
-              border: Border.all(color: Colors.black12, width: 2),
-              borderRadius: const BorderRadius.all(
-                Radius.circular(100.0),
-              ),
-            ),
-            child: Center(
-              child: icon,
-            ),
-          ),
-        ),
-        const SizedBox(height: 10),
-        Text(
-          title,
-          style: const TextStyle(
-            fontSize: 18,
-          ),
-        ),
-      ],
     );
   }
 }
