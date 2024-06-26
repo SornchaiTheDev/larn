@@ -41,7 +41,7 @@ class ChatScreen extends StatelessWidget {
                   Row(
                     children: [
                       IconButton(
-                        onPressed: () {},
+                        onPressed: () => Navigator.pushNamed(context, "/call"),
                         icon: const FaIcon(
                           FontAwesomeIcons.phone,
                         ),

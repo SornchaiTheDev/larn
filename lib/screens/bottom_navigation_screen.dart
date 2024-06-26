@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:larn/constants/colors.dart';
 import 'package:larn/screens/call_larn_screen.dart';
 import 'package:larn/screens/chats_screen.dart';
 import 'package:larn/screens/home_screen.dart';
 import 'package:larn/widgets/bottom_navigation_widget.dart';
+import 'package:larn/widgets/call_larn_button_widget.dart';
 
 class BottomNavigationScreen extends StatefulWidget {
   const BottomNavigationScreen({super.key});
@@ -58,43 +56,7 @@ class _BottomNavigationScreenState extends State<BottomNavigationScreen> {
                 onTap: onTap,
               ),
             ),
-            Positioned(
-              bottom: 50,
-              left: 0,
-              right: 0,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  GestureDetector(
-                    onTap: () => Navigator.pushNamed(context, "/call-larn"),
-                    child: Container(
-                      padding: const EdgeInsets.all(18.0),
-                      decoration: BoxDecoration(
-                        color: primaryColor,
-                        border: Border.all(
-                          width: 8,
-                          color: Colors.white,
-                          strokeAlign: BorderSide.strokeAlignOutside,
-                        ),
-                        borderRadius: const BorderRadius.all(
-                          Radius.circular(100.0),
-                        ),
-                      ),
-                      child: const Column(
-                        children: [
-                          FaIcon(
-                            FontAwesomeIcons.person,
-                            size: 38,
-                          ),
-                          Text("เรียกหลาน"),
-                        ],
-                      ),
-                    ),
-                  )
-                ],
-              ),
-            ),
+            CallLarnButtonWidget(onTap: onTap),
           ],
         ),
       ),

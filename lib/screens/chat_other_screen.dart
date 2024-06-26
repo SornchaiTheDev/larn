@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:larn/widgets/back_button_widget.dart';
+import 'package:larn/widgets/search_widget.dart';
 
 class ChatOtherScreen extends StatelessWidget {
   const ChatOtherScreen({super.key});
@@ -9,6 +9,7 @@ class ChatOtherScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
+        bottom: false,
         child: SizedBox(
           width: double.infinity,
           child: Column(
@@ -26,18 +27,17 @@ class ChatOtherScreen extends StatelessWidget {
                   ),
                 ],
               ),
+              const Padding(
+                padding: EdgeInsets.all(12.0),
+                child: SearchWidget(),
+              ),
               Expanded(
-                child: GridView.builder(
+                child: ListView.builder(
                   padding: const EdgeInsets.all(16.0),
                   itemCount: 10,
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 1,
-                    mainAxisSpacing: 24,
-                    crossAxisSpacing: 24,
-                    childAspectRatio: 1 / 0.8,
-                  ),
                   itemBuilder: (context, index) {
                     return Container(
+                      margin: EdgeInsets.only(bottom: index == 9 ? 40 : 20),
                       clipBehavior: Clip.antiAlias,
                       decoration: BoxDecoration(
                         border: Border.all(
