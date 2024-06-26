@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:larn/store/settings_store.dart';
 import 'package:larn/widgets/home_content_widget.dart';
+import 'package:provider/provider.dart';
 
 class AppContentWidget extends StatelessWidget {
   const AppContentWidget({
@@ -14,6 +16,10 @@ class AppContentWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double bodyfontsize = Provider.of<SettingStore>(context).bodyFontSize;
+    double subheadingFontSize =
+        Provider.of<SettingStore>(context).subHeadingFontSize;
+
     return HomeContentWidget(
       onNext: onNext,
       onPrev: onPrev,
@@ -25,32 +31,38 @@ class AppContentWidget extends StatelessWidget {
             width: 80,
           ),
           const SizedBox(width: 12),
-          const Column(
+          Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text("แนะนำ"),
+              Text(
+                "แนะนำ",
+                style: TextStyle(fontSize: bodyfontsize),
+              ),
               Text(
                 "Netflix",
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                style: TextStyle(
+                  fontSize: subheadingFontSize,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ],
           )
         ],
       ),
-      content: const Column(
+      content: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          FaIcon(
+          const FaIcon(
             FontAwesomeIcons.play,
             size: 40,
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
           Text(
             "กดเพื่อดูข้อมูล",
             style: TextStyle(
-              fontSize: 20,
+              fontSize: subheadingFontSize,
             ),
           ),
         ],

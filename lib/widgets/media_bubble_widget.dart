@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:larn/constants/bubble.dart';
+import 'package:larn/store/settings_store.dart';
+import 'package:provider/provider.dart';
 
 class MediaBubbleWidget extends StatelessWidget {
   const MediaBubbleWidget({
@@ -15,6 +17,7 @@ class MediaBubbleWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     bool isLeftSide = side == BubbleSide.left;
+    double bodyFontSize = Provider.of<SettingStore>(context).bodyFontSize;
 
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -89,20 +92,24 @@ class MediaBubbleWidget extends StatelessWidget {
                                   child: CircularProgressIndicator(),
                                 ),
                               ),
-                    errorBuilder: (context, error, stackTrace) =>
-                        const SizedBox(
+                    errorBuilder: (context, error, stackTrace) => SizedBox(
                       width: 400,
                       height: 400,
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          FaIcon(
+                          const FaIcon(
                             FontAwesomeIcons.triangleExclamation,
                             color: Colors.red,
                           ),
-                          SizedBox(height: 20),
-                          Text("เกิดข้อผิดพลาดในการโหลดมีเดีย"),
+                          const SizedBox(height: 20),
+                          Text(
+                            "เกิดข้อผิดพลาดในการโหลดมีเดีย",
+                            style: TextStyle(
+                              fontSize: bodyFontSize,
+                            ),
+                          ),
                         ],
                       ),
                     ),

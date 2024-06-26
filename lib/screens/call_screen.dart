@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:larn/store/settings_store.dart';
 import 'package:larn/widgets/action_button_widget.dart';
+import 'package:provider/provider.dart';
 
 class CallScreen extends StatelessWidget {
   const CallScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    double headingFontSize = Provider.of<SettingStore>(context).headingFontSize;
+    double subHeadingFontSize =
+        Provider.of<SettingStore>(context).subHeadingFontSize;
+
     return Scaffold(
       body: SizedBox(
         width: double.infinity,
@@ -19,19 +25,19 @@ class CallScreen extends StatelessWidget {
               backgroundImage: AssetImage("assets/images/larn1.png"),
             ),
             const SizedBox(height: 32),
-            const Text(
+            Text(
               "หลานโช",
               style: TextStyle(
-                fontSize: 32,
+                fontSize: headingFontSize,
               ),
             ),
             const SizedBox(
               height: 32,
             ),
-            const Text(
+            Text(
               "16:07",
               style: TextStyle(
-                fontSize: 26,
+                fontSize: subHeadingFontSize,
               ),
             ),
             const SizedBox(
@@ -72,11 +78,11 @@ class CallScreen extends StatelessWidget {
                   Colors.red,
                 ),
               ),
-              child: const Text(
+              child: Text(
                 "วางสาย",
                 style: TextStyle(
                   color: Colors.white,
-                  fontSize: 20,
+                  fontSize: subHeadingFontSize,
                 ),
               ),
             ),

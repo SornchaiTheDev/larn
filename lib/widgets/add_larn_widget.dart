@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:larn/store/settings_store.dart';
 import 'package:larn/widgets/apps_icon_widget.dart';
+import 'package:provider/provider.dart';
 
 class AddLarnWidget extends StatelessWidget {
   const AddLarnWidget({
@@ -10,6 +12,10 @@ class AddLarnWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Color primaryColor = Theme.of(context).primaryColor;
+    double bodyFontSize = Provider.of<SettingStore>(context).bodyFontSize;
+    double subHeadingFontSize =
+        Provider.of<SettingStore>(context).subHeadingFontSize;
+
     return SizedBox(
       width: double.infinity,
       child: Padding(
@@ -31,31 +37,33 @@ class AddLarnWidget extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Row(
+                Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    CircleAvatar(
+                    const CircleAvatar(
                       radius: 30,
                       backgroundImage: AssetImage("assets/images/larn1.png"),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 24,
                     ),
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
+                          Text(
                             "หลานภาษา",
                             style: TextStyle(
-                              fontSize: 18,
+                              fontSize: subHeadingFontSize,
                               fontWeight: FontWeight.w700,
                             ),
                           ),
                           const SizedBox(height: 6),
-                          const Text(
-                            "หลานบันเทิงจะช่วยให้คุณ ใช้งานแอปพลิเคชันความบันเทิงได้ง่ายขึ้น",
-                          ),
+                          Text(
+                              "หลานบันเทิงจะช่วยให้คุณ ใช้งานแอปพลิเคชันความบันเทิงได้ง่ายขึ้น",
+                              style: TextStyle(
+                                fontSize: bodyFontSize,
+                              )),
                           const SizedBox(height: 12),
                         ],
                       ),
@@ -66,12 +74,17 @@ class AddLarnWidget extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
-                    const Column(
+                    Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text("แอปที่สอน"),
-                        SizedBox(height: 6),
-                        AppsIconWidget()
+                        Text(
+                          "แอปที่สอน",
+                          style: TextStyle(
+                            fontSize: bodyFontSize,
+                          ),
+                        ),
+                        const SizedBox(height: 6),
+                        const AppsIconWidget()
                       ],
                     ),
                     InkWell(
@@ -87,17 +100,17 @@ class AddLarnWidget extends StatelessWidget {
                           ),
                           color: primaryColor,
                         ),
-                        child: const Row(
+                        child: Row(
                           children: [
-                            FaIcon(
+                            const FaIcon(
                               FontAwesomeIcons.plus,
                               size: 14,
                             ),
-                            SizedBox(width: 10),
+                            const SizedBox(width: 10),
                             Text(
                               "เพิ่มหลาน",
                               style: TextStyle(
-                                fontSize: 16,
+                                fontSize: bodyFontSize,
                                 fontWeight: FontWeight.w600,
                               ),
                             ),

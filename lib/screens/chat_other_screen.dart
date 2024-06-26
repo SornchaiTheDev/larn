@@ -1,13 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:larn/store/settings_store.dart';
 import 'package:larn/widgets/back_button_widget.dart';
 import 'package:larn/widgets/search_widget.dart';
+import 'package:provider/provider.dart';
 
 class ChatOtherScreen extends StatelessWidget {
   const ChatOtherScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    double bodyFontSize = Provider.of<SettingStore>(context).bodyFontSize;
+    double subHeadingFontSize =
+        Provider.of<SettingStore>(context).subHeadingFontSize;
+
     return Scaffold(
       body: SafeArea(
         bottom: false,
@@ -15,19 +21,19 @@ class ChatOtherScreen extends StatelessWidget {
           width: double.infinity,
           child: Column(
             children: [
-              const Row(
+              Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Expanded(child: BackButtonWidget()),
+                  const Expanded(child: BackButtonWidget()),
                   Column(
                     children: [
                       Text(
                         'วิดิโอสอนใช้',
-                        style: TextStyle(fontSize: 20),
+                        style: TextStyle(fontSize: subHeadingFontSize),
                       ),
                     ],
                   ),
-                  Expanded(child: SizedBox()),
+                  const Expanded(child: SizedBox()),
                 ],
               ),
               const Padding(
@@ -73,19 +79,24 @@ class ChatOtherScreen extends StatelessWidget {
                                           ),
                                         ),
                               errorBuilder: (context, error, stackTrace) =>
-                                  const SizedBox(
+                                  SizedBox(
                                 width: 400,
                                 height: 400,
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
-                                    FaIcon(
+                                    const FaIcon(
                                       FontAwesomeIcons.triangleExclamation,
                                       color: Colors.red,
                                     ),
-                                    SizedBox(height: 20),
-                                    Text("เกิดข้อผิดพลาดในการโหลดมีเดีย"),
+                                    const SizedBox(height: 20),
+                                    Text(
+                                      "เกิดข้อผิดพลาดในการโหลดมีเดีย",
+                                      style: TextStyle(
+                                        fontSize: bodyFontSize,
+                                      ),
+                                    ),
                                   ],
                                 ),
                               ),
@@ -112,16 +123,18 @@ class ChatOtherScreen extends StatelessWidget {
                                 const SizedBox(
                                   width: 10,
                                 ),
-                                const Expanded(
+                                Expanded(
                                   child: Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                         "พื้นฐานการใช้งานอะไรซักอย่าง",
-                                        style: TextStyle(fontSize: 20),
+                                        style: TextStyle(
+                                          fontSize: subHeadingFontSize,
+                                        ),
                                       ),
-                                      SizedBox(height: 4),
+                                      const SizedBox(height: 4),
                                       Row(
                                         crossAxisAlignment:
                                             CrossAxisAlignment.baseline,
@@ -130,16 +143,16 @@ class ChatOtherScreen extends StatelessWidget {
                                           Text(
                                             "โดย",
                                             style: TextStyle(
-                                              fontSize: 16,
+                                              fontSize: bodyFontSize,
                                             ),
                                           ),
-                                          SizedBox(
+                                          const SizedBox(
                                             width: 4,
                                           ),
                                           Text(
                                             "Netflix",
                                             style: TextStyle(
-                                              fontSize: 16,
+                                              fontSize: bodyFontSize,
                                               fontWeight: FontWeight.w600,
                                             ),
                                           ),

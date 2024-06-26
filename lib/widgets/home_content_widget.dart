@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:larn/store/settings_store.dart';
 import 'package:larn/widgets/content_control_widget.dart';
+import 'package:provider/provider.dart';
 
 class HomeContentWidget extends StatelessWidget {
   const HomeContentWidget({
@@ -19,6 +21,8 @@ class HomeContentWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double bodyfontsize = Provider.of<SettingStore>(context).bodyFontSize;
+
     return ClipRRect(
       borderRadius: BorderRadius.circular(10),
       child: Ink(
@@ -38,11 +42,16 @@ class HomeContentWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   topLeft,
-                  const Column(
+                  Column(
                     children: [
-                      FaIcon(FontAwesomeIcons.volumeHigh),
-                      SizedBox(height: 12),
-                      Text("เปิด/ปิดเสียง"),
+                      const FaIcon(FontAwesomeIcons.volumeHigh),
+                      const SizedBox(height: 12),
+                      Text(
+                        "เปิด/ปิดเสียง",
+                        style: TextStyle(
+                          fontSize: bodyfontsize,
+                        ),
+                      ),
                     ],
                   )
                 ],

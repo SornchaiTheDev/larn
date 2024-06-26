@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:larn/constants/bubble.dart';
+import 'package:larn/store/settings_store.dart';
+import 'package:provider/provider.dart';
 
 class ChatBubbleWidget extends StatelessWidget {
   const ChatBubbleWidget({
@@ -14,6 +16,7 @@ class ChatBubbleWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     bool isLeftSide = side == BubbleSide.left;
+    double bodyFontSize = Provider.of<SettingStore>(context).bodyFontSize;
 
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -74,8 +77,8 @@ class ChatBubbleWidget extends StatelessWidget {
                 ),
                 child: Text(
                   text,
-                  style: const TextStyle(
-                    fontSize: 18,
+                  style: TextStyle(
+                    fontSize: bodyFontSize,
                   ),
                 ),
               ),

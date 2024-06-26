@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:larn/store/settings_store.dart';
 import 'package:larn/widgets/apps_icon_widget.dart';
+import 'package:provider/provider.dart';
 
 class LarnWidget extends StatelessWidget {
   const LarnWidget({
@@ -8,6 +10,10 @@ class LarnWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double bodyFontSize = Provider.of<SettingStore>(context).bodyFontSize;
+    double subHeadingFontSize =
+        Provider.of<SettingStore>(context).subHeadingFontSize;
+
     return InkWell(
       onTap: () {
         Navigator.pushNamed(context, "/chat");
@@ -22,20 +28,20 @@ class LarnWidget extends StatelessWidget {
               backgroundImage: AssetImage("assets/images/larn1.png"),
             ),
             const SizedBox(width: 12),
-            const Expanded(
+            Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
-                  const Text(
+                children: [
+                  Text(
                     "หลานบันเทิง",
-                    style: TextStyle(fontSize: 20),
+                    style: TextStyle(fontSize: subHeadingFontSize),
                   ),
-                  const Text(
+                  Text(
                     "หลานบันเทิงจะช่วยให้คุณ ใช้งานแอปพลิเคชันความบันเทิงได้ง่ายขึ้น",
-                    style: TextStyle(fontSize: 16),
+                    style: TextStyle(fontSize: bodyFontSize),
                   ),
                   const SizedBox(height: 8),
-                  AppsIconWidget(),
+                  const AppsIconWidget(),
                 ],
               ),
             ),

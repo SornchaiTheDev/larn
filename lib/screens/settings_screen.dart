@@ -11,7 +11,8 @@ class SettingsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double headingFont = Provider.of<SettingStore>(context).headingFontSize;
+    double subHeadingFont =
+        Provider.of<SettingStore>(context).subHeadingFontSize;
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -19,15 +20,20 @@ class SettingsScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Row(
+              Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  BackButtonWidget(),
+                  const BackButtonWidget(),
                   Row(
                     children: [
-                      FaIcon(FontAwesomeIcons.gear),
-                      SizedBox(width: 8),
-                      Text("ตั้งค่า", style: TextStyle(fontSize: 20)),
+                      const FaIcon(FontAwesomeIcons.gear),
+                      const SizedBox(width: 8),
+                      Text(
+                        "ตั้งค่า",
+                        style: TextStyle(
+                          fontSize: subHeadingFont,
+                        ),
+                      ),
                     ],
                   )
                 ],
@@ -36,7 +42,7 @@ class SettingsScreen extends StatelessWidget {
               Text(
                 "ขนาดตัวอักษร",
                 style: TextStyle(
-                  fontSize: headingFont,
+                  fontSize: subHeadingFont,
                 ),
               ),
               const SizedBox(height: 24),
@@ -71,7 +77,7 @@ class SettingsScreen extends StatelessWidget {
                     Text(
                       "สีแอป",
                       style: TextStyle(
-                        fontSize: headingFont,
+                        fontSize: subHeadingFont,
                       ),
                     ),
                     const SizedBox(

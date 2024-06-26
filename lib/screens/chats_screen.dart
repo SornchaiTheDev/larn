@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:larn/store/settings_store.dart';
 import 'package:larn/widgets/larn_widget.dart';
 import 'package:larn/widgets/search_widget.dart';
+import 'package:provider/provider.dart';
 
 class ChatsScreen extends StatelessWidget {
   const ChatsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    double headingFontSize = Provider.of<SettingStore>(context).headingFontSize;
+    double bodyFontSize = Provider.of<SettingStore>(context).bodyFontSize;
+
     return SafeArea(
       bottom: false,
       child: Column(
@@ -19,16 +24,24 @@ class ChatsScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const Text("คุยกับหลาน", style: TextStyle(fontSize: 24)),
+                Text(
+                  "คุยกับหลาน",
+                  style: TextStyle(
+                    fontSize: headingFontSize,
+                  ),
+                ),
                 InkWell(
                   onTap: () {
                     Navigator.pushNamed(context, "/add-larn");
                   },
-                  child: const Row(
+                  child: Row(
                     children: [
-                      FaIcon(FontAwesomeIcons.userPlus),
-                      SizedBox(width: 8),
-                      Text("เพิ่มหลาน", style: TextStyle(fontSize: 16)),
+                      const FaIcon(FontAwesomeIcons.userPlus),
+                      const SizedBox(width: 8),
+                      Text(
+                        "เพิ่มหลาน",
+                        style: TextStyle(fontSize: bodyFontSize),
+                      ),
                     ],
                   ),
                 )

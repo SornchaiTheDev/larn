@@ -19,7 +19,33 @@ class SettingStore with ChangeNotifier {
       case FontSize.large:
         return 40;
       case FontSize.extraLarge:
-        return 50;
+        return 42;
+    }
+  }
+
+  double get subHeadingFontSize {
+    switch (_fontSize) {
+      case FontSize.small:
+        return 18;
+      case FontSize.medium:
+        return 20;
+      case FontSize.large:
+        return 22;
+      case FontSize.extraLarge:
+        return 24;
+    }
+  }
+
+  double get bodyFontSize {
+    switch (_fontSize) {
+      case FontSize.small:
+        return 14;
+      case FontSize.medium:
+        return 16;
+      case FontSize.large:
+        return 18;
+      case FontSize.extraLarge:
+        return 20;
     }
   }
 

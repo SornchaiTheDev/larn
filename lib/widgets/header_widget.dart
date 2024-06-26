@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:larn/store/settings_store.dart';
+import 'package:provider/provider.dart';
 
 class HeaderWidget extends StatelessWidget {
   const HeaderWidget({
@@ -8,24 +10,28 @@ class HeaderWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double subHeadingFontSize =
+        Provider.of<SettingStore>(context).subHeadingFontSize;
+    double bodyfontsize = Provider.of<SettingStore>(context).subHeadingFontSize;
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        const Text(
+        Text(
           "สวัสดีค่ะ ยายแอ๋ว",
-          style: TextStyle(fontSize: 20),
+          style: TextStyle(fontSize: bodyfontsize),
         ),
         InkWell(
           onTap: () {
             Navigator.pushNamed(context, "/settings");
           },
-          child: const Padding(
-            padding: EdgeInsets.all(8.0),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
             child: Row(
               children: [
-                FaIcon(FontAwesomeIcons.gear),
-                SizedBox(width: 8),
-                Text("ตั้งค่า", style: TextStyle(fontSize: 20)),
+                const FaIcon(FontAwesomeIcons.gear),
+                const SizedBox(width: 8),
+                Text("ตั้งค่า", style: TextStyle(fontSize: subHeadingFontSize)),
               ],
             ),
           ),

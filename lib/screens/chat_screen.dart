@@ -1,16 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:larn/constants/bubble.dart';
+import 'package:larn/store/settings_store.dart';
 import 'package:larn/widgets/back_button_widget.dart';
 import 'package:larn/widgets/chat_bubble_widget.dart';
 import 'package:larn/widgets/chat_message_widget.dart';
 import 'package:larn/widgets/media_bubble_widget.dart';
+import 'package:provider/provider.dart';
 
 class ChatScreen extends StatelessWidget {
   const ChatScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    double subHeadingFontSize =
+        Provider.of<SettingStore>(context).subHeadingFontSize;
+
+    double bodyFontSize = Provider.of<SettingStore>(context).bodyFontSize;
+
     return Scaffold(
       body: Column(
         children: [
@@ -29,13 +36,13 @@ class ChatScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const Row(
+                Row(
                   children: [
-                    BackButtonWidget(),
+                    const BackButtonWidget(),
                     Text(
                       "หลานโช",
                       style: TextStyle(
-                        fontSize: 24,
+                        fontSize: subHeadingFontSize,
                       ),
                     ),
                   ],
@@ -57,13 +64,14 @@ class ChatScreen extends StatelessWidget {
                       },
                       child: Ink(
                         padding: const EdgeInsets.all(10.0),
-                        child: const Row(
+                        child: Row(
                           children: [
-                            FaIcon(FontAwesomeIcons.ellipsisVertical),
-                            SizedBox(
+                            const FaIcon(FontAwesomeIcons.ellipsisVertical),
+                            const SizedBox(
                               width: 12,
                             ),
-                            Text('เพิ่มเติม')
+                            Text('เพิ่มเติม',
+                                style: TextStyle(fontSize: bodyFontSize))
                           ],
                         ),
                       ),

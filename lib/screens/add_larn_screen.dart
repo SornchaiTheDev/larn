@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:larn/store/settings_store.dart';
 import 'package:larn/widgets/add_larn_widget.dart';
 import 'package:larn/widgets/back_button_widget.dart';
+import 'package:provider/provider.dart';
 
 class AddLarnScreen extends StatelessWidget {
   const AddLarnScreen({super.key});
@@ -31,6 +33,9 @@ class TopNavigation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double subHeadingFontSize =
+        Provider.of<SettingStore>(context).subHeadingFontSize;
+
     return Container(
       padding: const EdgeInsets.only(top: 48),
       decoration: const BoxDecoration(
@@ -42,26 +47,22 @@ class TopNavigation extends StatelessWidget {
           ),
         ],
       ),
-      child: const Padding(
-        padding: EdgeInsets.all(16.0),
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Expanded(
+            const Expanded(
               child: BackButtonWidget(),
             ),
             Text(
               "เพิ่มหลาน",
               style: TextStyle(
-                fontSize: 22,
+                fontSize: subHeadingFontSize,
               ),
             ),
-            Expanded(
-              child: SizedBox(
-                width: 10,
-              ),
-            )
+            const Expanded(child: SizedBox())
           ],
         ),
       ),

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:larn/store/settings_store.dart';
+import 'package:provider/provider.dart';
 
 class ActionButtonWidget extends StatelessWidget {
   const ActionButtonWidget({
@@ -14,6 +16,7 @@ class ActionButtonWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double bodyFontSize = Provider.of<SettingStore>(context).bodyFontSize;
     return Column(
       children: [
         InkWell(
@@ -39,8 +42,8 @@ class ActionButtonWidget extends StatelessWidget {
         const SizedBox(height: 10),
         Text(
           title,
-          style: const TextStyle(
-            fontSize: 18,
+          style: TextStyle(
+            fontSize: bodyFontSize,
           ),
         ),
       ],
