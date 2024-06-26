@@ -63,7 +63,7 @@ class AddLarnScreen extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 const CircleAvatar(
-                                  radius: 60,
+                                  radius: 30,
                                   backgroundImage:
                                       AssetImage("assets/images/larn1.png"),
                                 ),

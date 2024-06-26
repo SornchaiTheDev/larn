@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:larn/widgets/chat_message_widget.dart';
 
 class CallLarnScreen extends StatelessWidget {
   const CallLarnScreen({super.key});
@@ -38,6 +39,17 @@ class CallLarnScreen extends StatelessWidget {
                   borderRadius: const BorderRadius.all(
                     Radius.circular(10.0),
                   ),
+                ),
+                child: Column(
+                  children: [
+                    Expanded(
+                      child: ListView(),
+                    ),
+                    const Padding(
+                      padding: EdgeInsets.fromLTRB(10, 0, 10, 14),
+                      child: ChatMessageWidget(),
+                    ),
+                  ],
                 ),
               ),
             ),

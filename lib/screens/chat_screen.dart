@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:larn/widgets/back_button_widget.dart';
+import 'package:larn/widgets/chat_message_widget.dart';
 
 class ChatScreen extends StatelessWidget {
   const ChatScreen({super.key});
@@ -73,35 +74,37 @@ class ChatScreen extends StatelessWidget {
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(12.0, 0, 12.0, 0),
-                child: ListView(
-                  children: const [
-                    SizedBox(height: 16),
-                    ChatBubbleWidget(
-                      side: BubbleSide.left,
-                      text:
-                          """Yes, it is possible to send sensor data from an Apple Watch to an Apple Watch app. Here’s a general outline of how you can achieve this:
-  1.	Accessing Sensor Data:
-  •	HealthKit: Use HealthKit to access health-related data such as heart rate, steps, and other metrics collected by the Apple Watch. This involves using HKHealthStore to request permissions and query health data.
-  •	Core Motion: Use Core Motion to access motion-related data such as accelerometer and gyroscope data. This involves using CMMotionManager to start and stop sensor updates.
-  2.	Developing the Apple Watch App:
-  •	Create a WatchKit app and WatchKit extension. This involves setting up the user interface in the WatchKit app and handling the business logic in the WatchKit extension.
-  •	Use WatchKit APIs to interact with the watch hardware and retrieve sensor data.
-  3.	Transmitting Data:
-  •	Watch Connectivity Framework: Use the Watch Connectivity framework to transfer data between the Apple Watch and its paired iPhone. This framework allows for the transfer of files, user info, and application context in the background.
-  •	Direct Communication: If you need real-time data transfer, you can use the WCSession class to send messages directly between the Apple Watch and the iPhone.""",
-                    ),
-                    SizedBox(height: 24),
-                    ChatBubbleWidget(
-                      side: BubbleSide.right,
-                      text:
-                          "Is it possible to send sensor data from apple watch to apple watch app",
-                    ),
-                    SizedBox(height: 24),
-                    MediaBubbleWidget(
+                child: SingleChildScrollView(
+                  child: const Column(
+                    children: [
+                      SizedBox(height: 16),
+                      ChatBubbleWidget(
                         side: BubbleSide.left,
-                        src:
-                            "https://m.media-amazon.com/images/M/MV5BOGUyZDUxZjEtMmIzMC00MzlmLTg4MGItZWJmMzBhZjE0Mjc1XkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_.jpg")
-                  ],
+                        text:
+                            """Yes, it is possible to send sensor data from an Apple Watch to an Apple Watch app. Here’s a general outline of how you can achieve this:
+        1.	Accessing Sensor Data:
+        •	HealthKit: Use HealthKit to access health-related data such as heart rate, steps, and other metrics collected by the Apple Watch. This involves using HKHealthStore to request permissions and query health data.
+        •	Core Motion: Use Core Motion to access motion-related data such as accelerometer and gyroscope data. This involves using CMMotionManager to start and stop sensor updates.
+        2.	Developing the Apple Watch App:
+        •	Create a WatchKit app and WatchKit extension. This involves setting up the user interface in the WatchKit app and handling the business logic in the WatchKit extension.
+        •	Use WatchKit APIs to interact with the watch hardware and retrieve sensor data.
+        3.	Transmitting Data:
+        •	Watch Connectivity Framework: Use the Watch Connectivity framework to transfer data between the Apple Watch and its paired iPhone. This framework allows for the transfer of files, user info, and application context in the background.
+        •	Direct Communication: If you need real-time data transfer, you can use the WCSession class to send messages directly between the Apple Watch and the iPhone.""",
+                      ),
+                      SizedBox(height: 24),
+                      ChatBubbleWidget(
+                        side: BubbleSide.right,
+                        text:
+                            "Is it possible to send sensor data from apple watch to apple watch app",
+                      ),
+                      SizedBox(height: 24),
+                      MediaBubbleWidget(
+                          side: BubbleSide.left,
+                          src:
+                              "https://m.media-amazon.com/images/M/MV5BOGUyZDUxZjEtMmIzMC00MzlmLTg4MGItZWJmMzBhZjE0Mjc1XkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_.jpg")
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -116,40 +119,9 @@ class ChatScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(12.0, 4, 12.0, 10),
-                child: Row(
-                  children: [
-                    const Expanded(
-                      child: TextField(
-                        decoration: InputDecoration(
-                          hintText: 'Enter text',
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(30.0),
-                            ),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(30.0),
-                            ),
-                            borderSide: BorderSide(color: Colors.blue),
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(30.0),
-                            ),
-                            borderSide: BorderSide(color: Colors.grey),
-                          ),
-                        ),
-                      ),
-                    ),
-                    IconButton(
-                      onPressed: () {},
-                      icon: const FaIcon(FontAwesomeIcons.microphone),
-                    ),
-                  ],
-                ),
+              child: const Padding(
+                padding: EdgeInsets.fromLTRB(12.0, 4, 12.0, 10),
+                child: ChatMessageWidget(),
               ),
             ),
           ],
