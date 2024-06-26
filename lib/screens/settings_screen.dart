@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:larn/constants/colors.dart';
 import 'package:larn/constants/font_size.dart';
 import 'package:larn/constants/theme.dart';
 import 'package:larn/store/settings_store.dart';
@@ -122,6 +121,7 @@ class ColorPaletteWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Color primaryColor = Theme.of(context).primaryColor;
     bool isActive = Provider.of<SettingStore>(context).theme == theme;
 
     return InkWell(
@@ -135,8 +135,7 @@ class ColorPaletteWidget extends StatelessWidget {
             decoration: BoxDecoration(
               borderRadius: const BorderRadius.all(Radius.circular(10.0)),
               border: Border.all(
-                color:
-                    isActive ? Theme.of(context).primaryColor : Colors.black12,
+                color: isActive ? primaryColor : Colors.black12,
                 strokeAlign: BorderSide.strokeAlignOutside,
                 width: 2,
               ),
@@ -172,6 +171,7 @@ class FontSizeWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Color primaryColor = Theme.of(context).primaryColor;
     bool isActive =
         Provider.of<SettingStore>(context).activeFontSize == fontSize;
 
@@ -197,7 +197,7 @@ class FontSizeWidget extends StatelessWidget {
         height: 100,
         decoration: BoxDecoration(
           border: Border.all(
-            color: isActive ? Theme.of(context).primaryColor : Colors.black12,
+            color: isActive ? primaryColor : Colors.black12,
             width: 2,
             strokeAlign: BorderSide.strokeAlignOutside,
           ),

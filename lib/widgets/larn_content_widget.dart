@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:larn/constants/colors.dart';
 import 'package:larn/widgets/home_content_widget.dart';
 
 class LarnContentWidget extends StatelessWidget {
@@ -15,6 +14,8 @@ class LarnContentWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Color primaryColor = Theme.of(context).primaryColor;
+
     return HomeContentWidget(
       onNext: onNext,
       onPrev: onPrev,

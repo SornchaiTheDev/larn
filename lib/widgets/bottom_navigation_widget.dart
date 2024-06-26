@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:larn/constants/colors.dart';
 
 class BottomNavigationWidget extends StatelessWidget {
   const BottomNavigationWidget(
@@ -11,6 +10,7 @@ class BottomNavigationWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Color primaryColor = Theme.of(context).primaryColor;
     return SizedBox(
       height: 100,
       child: Stack(

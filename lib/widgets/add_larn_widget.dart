@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:larn/constants/colors.dart';
 import 'package:larn/widgets/apps_icon_widget.dart';
 
 class AddLarnWidget extends StatelessWidget {
@@ -10,6 +9,7 @@ class AddLarnWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Color primaryColor = Theme.of(context).primaryColor;
     return SizedBox(
       width: double.infinity,
       child: Padding(
@@ -76,14 +76,13 @@ class AddLarnWidget extends StatelessWidget {
                     ),
                     InkWell(
                       onTap: () {},
-                      splashColor: Colors.amber,
                       borderRadius: const BorderRadius.all(
                         Radius.circular(10.0),
                       ),
                       child: Ink(
                         padding: const EdgeInsets.fromLTRB(24, 12, 24, 12),
-                        decoration: const BoxDecoration(
-                          borderRadius: BorderRadius.all(
+                        decoration: BoxDecoration(
+                          borderRadius: const BorderRadius.all(
                             Radius.circular(10.0),
                           ),
                           color: primaryColor,
