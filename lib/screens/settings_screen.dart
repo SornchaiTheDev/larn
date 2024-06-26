@@ -2,13 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:larn/constants/colors.dart';
 import 'package:larn/constants/font_size.dart';
+import 'package:larn/constants/theme.dart';
+import 'package:larn/store/settings_store.dart';
 import 'package:larn/widgets/back_button_widget.dart';
+import 'package:provider/provider.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    double headingFont = Provider.of<SettingStore>(context).headingFontSize;
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -30,9 +34,11 @@ class SettingsScreen extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 24),
-              const Text(
+              Text(
                 "ขนาดตัวอักษร",
-                style: TextStyle(fontSize: 24),
+                style: TextStyle(
+                  fontSize: headingFont,
+                ),
               ),
               const SizedBox(height: 24),
               Flexible(
@@ -48,7 +54,6 @@ class SettingsScreen extends StatelessWidget {
                     ),
                     FontSizeWidget(
                       fontSize: FontSize.medium,
-                      isActive: true,
                     ),
                     FontSizeWidget(
                       fontSize: FontSize.large,
@@ -59,7 +64,7 @@ class SettingsScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              const Flexible(
+              Flexible(
                 flex: 1,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -67,28 +72,28 @@ class SettingsScreen extends StatelessWidget {
                     Text(
                       "สีแอป",
                       style: TextStyle(
-                        fontSize: 24,
+                        fontSize: headingFont,
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 14,
                     ),
-                    Row(
+                    const Row(
                       children: [
                         ColorPaletteWidget(
-                          accentColor: primaryColor,
+                          theme: greenTheme,
                         ),
                         SizedBox(
                           width: 20,
                         ),
                         ColorPaletteWidget(
-                          accentColor: Colors.amber,
+                          theme: amberTheme,
                         ),
                         SizedBox(
                           width: 20,
                         ),
                         ColorPaletteWidget(
-                          accentColor: Colors.purple,
+                          theme: purpleTheme,
                         ),
                       ],
                     ),
@@ -103,46 +108,56 @@ class SettingsScreen extends StatelessWidget {
   }
 }
 
+typedef AppTheme = Map<String, Color>;
+
 class ColorPaletteWidget extends StatelessWidget {
   const ColorPaletteWidget({
     super.key,
-    required this.accentColor,
+    required this.theme,
   });
 
-  final Color accentColor;
+  final AppTheme theme;
 
   final double boxSize = 46.0;
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Container(
-          clipBehavior: Clip.antiAlias,
-          decoration: BoxDecoration(
-            borderRadius: const BorderRadius.all(Radius.circular(10.0)),
-            border: Border.all(
-              color: Colors.black12,
-              strokeAlign: BorderSide.strokeAlignOutside,
-              width: 1,
+    bool isActive = Provider.of<SettingStore>(context).theme == theme;
+
+    return InkWell(
+      borderRadius: const BorderRadius.all(Radius.circular(10.0)),
+      onTap: () =>
+          Provider.of<SettingStore>(context, listen: false).setTheme(theme),
+      child: Row(
+        children: [
+          Container(
+            clipBehavior: Clip.antiAlias,
+            decoration: BoxDecoration(
+              borderRadius: const BorderRadius.all(Radius.circular(10.0)),
+              border: Border.all(
+                color:
+                    isActive ? Theme.of(context).primaryColor : Colors.black12,
+                strokeAlign: BorderSide.strokeAlignOutside,
+                width: 2,
+              ),
+            ),
+            child: Row(
+              children: [
+                Container(
+                  width: boxSize,
+                  height: boxSize,
+                  color: Colors.white,
+                ),
+                Container(
+                  width: boxSize,
+                  height: boxSize,
+                  color: theme["primary"],
+                ),
+              ],
             ),
           ),
-          child: Row(
-            children: [
-              Container(
-                width: boxSize,
-                height: boxSize,
-                color: Colors.white,
-              ),
-              Container(
-                width: boxSize,
-                height: boxSize,
-                color: accentColor,
-              ),
-            ],
-          ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
@@ -151,14 +166,15 @@ class FontSizeWidget extends StatelessWidget {
   const FontSizeWidget({
     super.key,
     required this.fontSize,
-    this.isActive = false,
   });
 
   final FontSize fontSize;
-  final bool isActive;
 
   @override
   Widget build(BuildContext context) {
+    bool isActive =
+        Provider.of<SettingStore>(context).activeFontSize == fontSize;
+
     double localFontSize = 0;
 
     switch (fontSize) {
@@ -173,14 +189,15 @@ class FontSizeWidget extends StatelessWidget {
     }
 
     return InkWell(
-      onTap: () {},
+      onTap: () => Provider.of<SettingStore>(context, listen: false)
+          .setFontSize(fontSize),
       splashColor: isActive ? primaryColor.withOpacity(0.8) : Colors.black12,
       child: Ink(
         width: 100,
         height: 100,
         decoration: BoxDecoration(
           border: Border.all(
-            color: isActive ? primaryColor : Colors.black12,
+            color: isActive ? Theme.of(context).primaryColor : Colors.black12,
             width: 2,
             strokeAlign: BorderSide.strokeAlignOutside,
           ),

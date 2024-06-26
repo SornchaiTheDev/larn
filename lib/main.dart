@@ -8,9 +8,16 @@ import 'package:larn/screens/chat_other_screen.dart';
 import 'package:larn/screens/chat_screen.dart';
 import 'package:larn/screens/chats_screen.dart';
 import 'package:larn/screens/settings_screen.dart';
+import 'package:larn/store/settings_store.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const App());
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => SettingStore(),
+      child: const App(),
+    ),
+  );
 }
 
 class App extends StatelessWidget {
@@ -23,6 +30,7 @@ class App extends StatelessWidget {
       theme: ThemeData(
         fontFamily: GoogleFonts.prompt().fontFamily,
         scaffoldBackgroundColor: Colors.white,
+        primaryColor: Provider.of<SettingStore>(context).theme['primary'],
       ),
       routes: {
         '/': (context) => const BottomNavigationScreen(),
