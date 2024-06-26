@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:larn/constants/colors.dart';
+import 'package:larn/widgets/apps_icon_widget.dart';
 import 'package:larn/widgets/back_button_widget.dart';
 
 class AddLarnScreen extends StatelessWidget {
@@ -96,43 +97,12 @@ class AddLarnScreen extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               crossAxisAlignment: CrossAxisAlignment.end,
                               children: [
-                                Column(
+                                const Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    const Text("แอปที่สอน"),
-                                    const SizedBox(height: 6),
-                                    Row(
-                                      children: [
-                                        "https://static-00.iconduck.com/assets.00/netflix-icon-icon-2048x2048-yj41gpvr.png",
-                                        "https://cdn.pixabay.com/photo/2021/06/15/12/28/tiktok-6338429_960_720.png",
-                                        "https://t3.ftcdn.net/jpg/04/74/05/94/360_F_474059464_qldYuzxaUWEwNTtYBJ44VN89ARuFktHW.jpg",
-                                      ].map((String src) {
-                                        return Row(
-                                          children: [
-                                            Container(
-                                              decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(8),
-                                                border: Border.all(
-                                                  color: Colors.black12,
-                                                  width: 2,
-                                                  strokeAlign: BorderSide
-                                                      .strokeAlignOutside,
-                                                ),
-                                              ),
-                                              clipBehavior: Clip.antiAlias,
-                                              child: Image.network(
-                                                src,
-                                                width: 40,
-                                                height: 40,
-                                                fit: BoxFit.cover,
-                                              ),
-                                            ),
-                                            const SizedBox(width: 8),
-                                          ],
-                                        );
-                                      }).toList(),
-                                    )
+                                    Text("แอปที่สอน"),
+                                    SizedBox(height: 6),
+                                    AppsIconWidget()
                                   ],
                                 ),
                                 InkWell(
