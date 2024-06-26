@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:larn/widgets/back_button_widget.dart';
 import 'package:larn/widgets/search_widget.dart';
 
@@ -15,8 +16,9 @@ class ChatOtherScreen extends StatelessWidget {
           child: Column(
             children: [
               const Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  BackButtonWidget(),
+                  Expanded(child: BackButtonWidget()),
                   Column(
                     children: [
                       Text(
@@ -25,6 +27,7 @@ class ChatOtherScreen extends StatelessWidget {
                       ),
                     ],
                   ),
+                  Expanded(child: SizedBox()),
                 ],
               ),
               const Padding(
@@ -52,9 +55,41 @@ class ChatOtherScreen extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Image.network(
-                            "https://marketplace.canva.com/EAFW7JwIojo/2/0/1600w/canva-red-colorful-tips-youtube-thumbnail-FxVVsqyawqY.jpg",
-                            fit: BoxFit.cover,
+                          SizedBox(
+                            width: 400,
+                            height: 200,
+                            child: Image.network(
+                              "https://marketplace.canva.com/EAFW7JwIojo/2/0/1600w/canva-red-colorful-tips-youtube-thumbnail-FxVVsqyawqY.jpg",
+                              fit: BoxFit.cover,
+                              loadingBuilder: (context, child,
+                                      loadingProgress) =>
+                                  loadingProgress == null
+                                      ? child
+                                      : const SizedBox(
+                                          width: 400,
+                                          height: 300,
+                                          child: Center(
+                                            child: CircularProgressIndicator(),
+                                          ),
+                                        ),
+                              errorBuilder: (context, error, stackTrace) =>
+                                  const SizedBox(
+                                width: 400,
+                                height: 400,
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    FaIcon(
+                                      FontAwesomeIcons.triangleExclamation,
+                                      color: Colors.red,
+                                    ),
+                                    SizedBox(height: 20),
+                                    Text("เกิดข้อผิดพลาดในการโหลดมีเดีย"),
+                                  ],
+                                ),
+                              ),
+                            ),
                           ),
                           const SizedBox(height: 12),
                           Padding(
