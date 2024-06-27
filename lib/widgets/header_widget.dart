@@ -10,16 +10,26 @@ class HeaderWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double headingFontSize = Provider.of<SettingStore>(context).headingFontSize;
     double subHeadingFontSize =
         Provider.of<SettingStore>(context).subHeadingFontSize;
-    double bodyfontsize = Provider.of<SettingStore>(context).subHeadingFontSize;
+    double bodyfontsize = Provider.of<SettingStore>(context).bodyFontSize;
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(
-          "สวัสดีค่ะ ยายแอ๋ว",
-          style: TextStyle(fontSize: bodyfontsize),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              "สวัสดีค่ะ",
+              style: TextStyle(fontSize: bodyfontsize),
+            ),
+            Text(
+              "Guest",
+              style: TextStyle(fontSize: headingFontSize),
+            ),
+          ],
         ),
         InkWell(
           onTap: () {
