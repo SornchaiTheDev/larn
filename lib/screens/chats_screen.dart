@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:larn/model/larn.dart';
+import 'package:larn/store/larn_store.dart';
 import 'package:larn/store/settings_store.dart';
 import 'package:larn/widgets/larn_widget.dart';
 import 'package:larn/widgets/search_widget.dart';
@@ -13,6 +15,7 @@ class ChatsScreen extends StatelessWidget {
     double headingFontSize = Provider.of<SettingStore>(context).headingFontSize;
     double bodyFontSize = Provider.of<SettingStore>(context).bodyFontSize;
 
+    List<Larn> larnList = Provider.of<LarnStore>(context).larnList;
     return SafeArea(
       bottom: false,
       child: Column(
@@ -55,23 +58,22 @@ class ChatsScreen extends StatelessWidget {
           ),
           const SizedBox(height: 10),
           Expanded(
-            child: ListView(
-              children: const [
-                Divider(),
-                LarnWidget(),
-                Divider(),
-                LarnWidget(),
-                Divider(),
-                LarnWidget(),
-                Divider(),
-                LarnWidget(),
-                Divider(),
-                LarnWidget(),
-                Divider(),
-                LarnWidget(),
-                Divider(),
-                SizedBox(height: 160),
-              ],
+            child: ListView.builder(
+              itemCount: larnList.length,
+              itemBuilder: (context, index) {
+                if (index == 9) {
+                  return const SizedBox(height: 160);
+                }
+
+                return Column(
+                  children: [
+                    LarnWidget(
+                      larn: larnList[index],
+                    ),
+                    const Divider(),
+                  ],
+                );
+              },
             ),
           ),
         ],

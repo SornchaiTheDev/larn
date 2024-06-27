@@ -74,18 +74,23 @@ class AddLarnWidget extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "แอปที่สอน",
-                          style: TextStyle(
-                            fontSize: bodyFontSize,
+                    Visibility(
+                      visible: false,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "แอปที่สอน",
+                            style: TextStyle(
+                              fontSize: bodyFontSize,
+                            ),
                           ),
-                        ),
-                        const SizedBox(height: 6),
-                        const AppsIconWidget()
-                      ],
+                          const SizedBox(height: 6),
+                          const AppsIconWidget(
+                            appList: [],
+                          )
+                        ],
+                      ),
                     ),
                     InkWell(
                       onTap: () {},

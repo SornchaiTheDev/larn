@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:larn/model/larn.dart';
 import 'package:larn/store/settings_store.dart';
 import 'package:larn/widgets/apps_icon_widget.dart';
 import 'package:provider/provider.dart';
@@ -6,26 +8,31 @@ import 'package:provider/provider.dart';
 class LarnWidget extends StatelessWidget {
   const LarnWidget({
     super.key,
+    required this.larn,
   });
+
+  final Larn larn;
 
   @override
   Widget build(BuildContext context) {
+    final Larn(:name, :description, :image, :id, :appList) = larn;
+
     double bodyFontSize = Provider.of<SettingStore>(context).bodyFontSize;
     double subHeadingFontSize =
         Provider.of<SettingStore>(context).subHeadingFontSize;
 
     return InkWell(
       onTap: () {
-        Navigator.pushNamed(context, "/chat");
+        Navigator.pushNamed(context, "/chat", arguments: larn);
       },
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const CircleAvatar(
+            CircleAvatar(
               radius: 30,
-              backgroundImage: AssetImage("assets/images/larn1.png"),
+              backgroundImage: AssetImage(image),
             ),
             const SizedBox(width: 12),
             Expanded(
@@ -33,15 +40,15 @@ class LarnWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "หลานบันเทิง",
+                    name,
                     style: TextStyle(fontSize: subHeadingFontSize),
                   ),
                   Text(
-                    "หลานบันเทิงจะช่วยให้คุณ ใช้งานแอปพลิเคชันความบันเทิงได้ง่ายขึ้น",
+                    description,
                     style: TextStyle(fontSize: bodyFontSize),
                   ),
                   const SizedBox(height: 8),
-                  const AppsIconWidget(),
+                  AppsIconWidget(appList: appList),
                 ],
               ),
             ),
