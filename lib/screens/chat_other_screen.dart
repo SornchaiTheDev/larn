@@ -5,15 +5,32 @@ import 'package:larn/widgets/back_button_widget.dart';
 import 'package:larn/widgets/search_widget.dart';
 import 'package:provider/provider.dart';
 
-class ChatOtherScreen extends StatelessWidget {
+class ChatOtherScreen extends StatefulWidget {
   const ChatOtherScreen({super.key});
 
+  @override
+  State<ChatOtherScreen> createState() => _ChatOtherScreenState();
+}
+
+class _ChatOtherScreenState extends State<ChatOtherScreen> {
   @override
   Widget build(BuildContext context) {
     double bodyFontSize = Provider.of<SettingStore>(context).bodyFontSize;
     double subHeadingFontSize =
         Provider.of<SettingStore>(context).subHeadingFontSize;
 
+    final TextEditingController controller = TextEditingController();
+    controller.addListener(() {
+      setState(() {});
+    });
+
+    List<String> videos = [];
+
+    String searchValue = controller.text;
+    List<String> filterdContents = videos
+        .where(
+            (video) => video.toLowerCase().contains(searchValue.toLowerCase()))
+        .toList();
     return Scaffold(
       body: SafeArea(
         bottom: false,
@@ -36,9 +53,11 @@ class ChatOtherScreen extends StatelessWidget {
                   const Expanded(child: SizedBox()),
                 ],
               ),
-              const Padding(
-                padding: EdgeInsets.all(12.0),
-                child: SearchWidget(),
+              Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: SearchWidget(
+                  controller: controller,
+                ),
               ),
               Expanded(
                 child: ListView.builder(

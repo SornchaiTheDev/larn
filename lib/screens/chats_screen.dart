@@ -7,8 +7,29 @@ import 'package:larn/widgets/larn_widget.dart';
 import 'package:larn/widgets/search_widget.dart';
 import 'package:provider/provider.dart';
 
-class ChatsScreen extends StatelessWidget {
+class ChatsScreen extends StatefulWidget {
   const ChatsScreen({super.key});
+
+  @override
+  State<ChatsScreen> createState() => _ChatsScreenState();
+}
+
+class _ChatsScreenState extends State<ChatsScreen> {
+  final TextEditingController controller = TextEditingController();
+
+  @override
+  void initState() {
+    controller.addListener(() {
+      setState(() {});
+    });
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -16,6 +37,13 @@ class ChatsScreen extends StatelessWidget {
     double bodyFontSize = Provider.of<SettingStore>(context).bodyFontSize;
 
     List<Larn> larnList = Provider.of<LarnStore>(context).larnList;
+
+    String searchValue = controller.text;
+    List<Larn> filterdLarnList = larnList
+        .where((larn) =>
+            larn.name.toLowerCase().contains(searchValue.toLowerCase()))
+        .toList();
+
     return SafeArea(
       bottom: false,
       child: Column(
@@ -52,14 +80,16 @@ class ChatsScreen extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 10),
-          const Padding(
-            padding: EdgeInsets.all(12.0),
-            child: SearchWidget(),
+          Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: SearchWidget(
+              controller: controller,
+            ),
           ),
           const SizedBox(height: 10),
           Expanded(
             child: ListView.builder(
-              itemCount: larnList.length,
+              itemCount: filterdLarnList.length,
               itemBuilder: (context, index) {
                 if (index == 9) {
                   return const SizedBox(height: 160);
@@ -68,7 +98,7 @@ class ChatsScreen extends StatelessWidget {
                 return Column(
                   children: [
                     LarnWidget(
-                      larn: larnList[index],
+                      larn: filterdLarnList[index],
                     ),
                     const Divider(),
                   ],

@@ -6,13 +6,17 @@ import 'package:provider/provider.dart';
 class SearchWidget extends StatelessWidget {
   const SearchWidget({
     super.key,
+    required this.controller,
   });
+
+  final TextEditingController controller;
 
   @override
   Widget build(BuildContext context) {
     double bodyFontSize = Provider.of<SettingStore>(context).bodyFontSize;
 
     return TextField(
+      controller: controller,
       style: TextStyle(fontSize: bodyFontSize),
       decoration: InputDecoration(
         prefixIcon: Container(
