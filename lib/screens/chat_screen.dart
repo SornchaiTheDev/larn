@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:larn/constants/bubble.dart';
+import 'package:larn/model/larn.dart';
 import 'package:larn/store/settings_store.dart';
 import 'package:larn/widgets/back_button_widget.dart';
 import 'package:larn/widgets/chat_bubble_widget.dart';
@@ -13,6 +14,9 @@ class ChatScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Larn larn = ModalRoute.of(context)!.settings.arguments as Larn;
+    final Larn(:name, :image) = larn;
+
     double subHeadingFontSize =
         Provider.of<SettingStore>(context).subHeadingFontSize;
 
@@ -40,7 +44,7 @@ class ChatScreen extends StatelessWidget {
                   children: [
                     const BackButtonWidget(),
                     Text(
-                      "หลานโช",
+                      name,
                       style: TextStyle(
                         fontSize: subHeadingFontSize,
                       ),
@@ -50,7 +54,11 @@ class ChatScreen extends StatelessWidget {
                 Row(
                   children: [
                     IconButton(
-                      onPressed: () => Navigator.pushNamed(context, "/call"),
+                      onPressed: () => Navigator.pushNamed(
+                        context,
+                        "/call",
+                        arguments: larn,
+                      ),
                       icon: const FaIcon(
                         FontAwesomeIcons.phone,
                       ),
@@ -93,13 +101,15 @@ class ChatScreen extends StatelessWidget {
 
                   switch (index) {
                     case 0:
-                      widget = const ChatBubbleWidget(
+                      widget = ChatBubbleWidget(
+                        image: image,
                         side: BubbleSide.right,
                         text:
                             "Is it possible to send sensor data from apple watch to apple watch app",
                       );
                     case 1:
-                      widget = const ChatBubbleWidget(
+                      widget = ChatBubbleWidget(
+                        image: image,
                         side: BubbleSide.left,
                         text:
                             """Yes, it is possible to send sensor data from an Apple Watch to an Apple Watch app. Here’s a general outline of how you can achieve this:
@@ -114,7 +124,8 @@ class ChatScreen extends StatelessWidget {
                   •	Direct Communication: If you need real-time data transfer, you can use the WCSession class to send messages directly between the Apple Watch and the iPhone.""",
                       );
                     case 2:
-                      widget = const MediaBubbleWidget(
+                      widget = MediaBubbleWidget(
+                          image: image,
                           side: BubbleSide.left,
                           src:
                               "https://m.media-amazon.com/images/M/MV5BOGUyZDUxZjEtMmIzMC00MzlmLTg4MGItZWJmMzBhZjE0Mjc1XkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_.jpg");

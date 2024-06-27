@@ -8,10 +8,12 @@ class ChatBubbleWidget extends StatelessWidget {
     super.key,
     required this.side,
     required this.text,
+    required this.image,
   });
 
   final BubbleSide side;
   final String text;
+  final String image;
 
   @override
   Widget build(BuildContext context) {
@@ -23,9 +25,9 @@ class ChatBubbleWidget extends StatelessWidget {
       children: [
         Visibility(
           visible: side == BubbleSide.left,
-          child: const CircleAvatar(
+          child: CircleAvatar(
             radius: 20,
-            backgroundImage: AssetImage("assets/images/larn1.png"),
+            backgroundImage: AssetImage(image),
           ),
         ),
         const SizedBox(

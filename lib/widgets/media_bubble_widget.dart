@@ -9,10 +9,12 @@ class MediaBubbleWidget extends StatelessWidget {
     super.key,
     required this.side,
     required this.src,
+    required this.image,
   });
 
   final BubbleSide side;
   final String src;
+  final String image;
 
   @override
   Widget build(BuildContext context) {
@@ -24,9 +26,9 @@ class MediaBubbleWidget extends StatelessWidget {
       children: [
         Visibility(
           visible: side == BubbleSide.left,
-          child: const CircleAvatar(
+          child: CircleAvatar(
             radius: 20,
-            backgroundImage: AssetImage("assets/images/larn1.png"),
+            backgroundImage: AssetImage(image),
           ),
         ),
         const SizedBox(

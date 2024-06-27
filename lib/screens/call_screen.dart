@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:larn/model/larn.dart';
 import 'package:larn/store/settings_store.dart';
 import 'package:larn/widgets/action_button_widget.dart';
 import 'package:provider/provider.dart';
@@ -9,6 +10,9 @@ class CallScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Larn(:name, :image) =
+        ModalRoute.of(context)!.settings.arguments as Larn;
+
     double headingFontSize = Provider.of<SettingStore>(context).headingFontSize;
     double subHeadingFontSize =
         Provider.of<SettingStore>(context).subHeadingFontSize;
@@ -20,13 +24,13 @@ class CallScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const CircleAvatar(
+            CircleAvatar(
               radius: 90,
-              backgroundImage: AssetImage("assets/images/larn1.png"),
+              backgroundImage: AssetImage(image),
             ),
             const SizedBox(height: 32),
             Text(
-              "หลานโช",
+              name,
               style: TextStyle(
                 fontSize: headingFontSize,
               ),
