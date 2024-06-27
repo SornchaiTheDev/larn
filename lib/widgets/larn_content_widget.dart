@@ -1,19 +1,31 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:larn/store/settings_store.dart';
 import 'package:larn/widgets/home_content_widget.dart';
 import 'package:provider/provider.dart';
 
-class LarnContentWidget extends StatelessWidget {
+class LarnContentWidget extends StatefulWidget {
   const LarnContentWidget({
     super.key,
     required this.onNext,
     required this.onPrev,
+    required this.name,
+    required this.content,
+    required this.profileImage,
   });
 
   final VoidCallback onPrev;
   final VoidCallback onNext;
+  final String name;
+  final String content;
+  final String profileImage;
+
+  @override
+  State<LarnContentWidget> createState() => _LarnContentWidgetState();
+}
+
+class _LarnContentWidgetState extends State<LarnContentWidget> {
+  bool isLove = false;
 
   @override
   Widget build(BuildContext context) {
@@ -25,8 +37,8 @@ class LarnContentWidget extends StatelessWidget {
     return HomeContentWidget(
       isVolumeOn: false,
       onVolumeToggle: () {},
-      onNext: onNext,
-      onPrev: onPrev,
+      onNext: widget.onNext,
+      onPrev: widget.onPrev,
       topLeft: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -38,13 +50,13 @@ class LarnContentWidget extends StatelessWidget {
               borderRadius: BorderRadius.circular(100),
             ),
             child: Image.asset(
-              "assets/images/larn1.png",
+              widget.profileImage,
               fit: BoxFit.cover,
             ),
           ),
           const SizedBox(width: 12),
           Text(
-            "หลานข่าว",
+            widget.name,
             style: TextStyle(
               fontSize: subHeadingFontSize,
               fontWeight: FontWeight.bold,
@@ -61,22 +73,30 @@ class LarnContentWidget extends StatelessWidget {
                 width: double.infinity,
                 padding: const EdgeInsets.all(16),
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Nibh nisl condimentum id venenatis a. Urna duis convallis convallis tellus id interdum. Sit amet porttitor eget dolor",
+                          widget.content,
                           style: TextStyle(
                             fontSize: bodyFontSize,
                           ),
                         ),
                         const SizedBox(height: 20),
-                        const FaIcon(
-                          FontAwesomeIcons.solidHeart,
-                          color: Colors.red,
-                          size: 24,
+                        GestureDetector(
+                          onTap: () => setState(() {
+                            isLove = !isLove;
+                          }),
+                          child: FaIcon(
+                            isLove
+                                ? FontAwesomeIcons.solidHeart
+                                : FontAwesomeIcons.heart,
+                            color: isLove ? Colors.red : Colors.grey,
+                            size: 24,
+                          ),
                         ),
                       ],
                     ),
@@ -89,39 +109,58 @@ class LarnContentWidget extends StatelessWidget {
             bottom: 0,
             left: 0,
             right: 0,
-            child: Column(
-              children: [
-                Align(
-                  alignment: Alignment.center,
-                  child: InkWell(
-                    onTap: () {},
-                    borderRadius: BorderRadius.circular(100),
-                    child: Ink(
-                      padding: const EdgeInsets.fromLTRB(24, 12, 24, 12),
-                      width: 200,
-                      decoration: BoxDecoration(
-                        color: primaryColor,
-                        borderRadius: BorderRadius.circular(100),
-                      ),
-                      child: Center(
-                        child: Text(
-                          "กดเพื่อคุยต่อ",
-                          style: TextStyle(
-                            fontSize: bodyFontSize,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-              ],
+            child: CTAButonWidget(
+              primaryColor: primaryColor,
+              bodyFontSize: bodyFontSize,
             ),
           ),
         ],
       ),
+    );
+  }
+}
+
+class CTAButonWidget extends StatelessWidget {
+  const CTAButonWidget({
+    super.key,
+    required this.primaryColor,
+    required this.bodyFontSize,
+  });
+
+  final Color primaryColor;
+  final double bodyFontSize;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Align(
+          alignment: Alignment.center,
+          child: InkWell(
+            onTap: () {},
+            borderRadius: BorderRadius.circular(100),
+            child: Ink(
+              padding: const EdgeInsets.fromLTRB(24, 12, 24, 12),
+              width: 200,
+              decoration: BoxDecoration(
+                color: primaryColor,
+                borderRadius: BorderRadius.circular(100),
+              ),
+              child: Center(
+                child: Text(
+                  "กดเพื่อคุยต่อ",
+                  style: TextStyle(
+                    fontSize: bodyFontSize,
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
+        const SizedBox(
+          height: 10,
+        ),
+      ],
     );
   }
 }

@@ -36,10 +36,18 @@ class _HomeScreenState extends State<HomeScreen> {
                   ? AppContentWidget(
                       onNext: () => setState(() => currentContent--),
                       onPrev: () => setState(() => currentContent++),
+                      name: "Netflix",
+                      content:
+                          "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+                      image:
+                          "https://static-00.iconduck.com/assets.00/netflix-icon-icon-2048x2048-yj41gpvr.png",
                     )
                   : LarnContentWidget(
                       onNext: () => setState(() => currentContent--),
                       onPrev: () => setState(() => currentContent++),
+                      name: "หลานข่าว",
+                      content: "หลานข่าว",
+                      profileImage: "assets/images/larn1.png",
                     ),
             ),
           ),

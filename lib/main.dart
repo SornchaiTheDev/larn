@@ -31,6 +31,16 @@ class App extends StatelessWidget {
         fontFamily: GoogleFonts.prompt().fontFamily,
         scaffoldBackgroundColor: Colors.white,
         primaryColor: Provider.of<SettingStore>(context).theme['primary'],
+        sliderTheme: SliderThemeData(
+          trackHeight: 4,
+          thumbColor: Provider.of<SettingStore>(context).theme['primary'],
+          activeTrackColor: Provider.of<SettingStore>(context).theme['primary'],
+          thumbShape: const RoundSliderThumbShape(enabledThumbRadius: 8),
+          overlayShape: const RoundSliderOverlayShape(overlayRadius: 16),
+        ),
+        progressIndicatorTheme: ProgressIndicatorThemeData(
+          color: Provider.of<SettingStore>(context).theme['primary'],
+        ),
       ),
       routes: {
         '/': (context) => const BottomNavigationScreen(),

@@ -9,10 +9,16 @@ class AppContentWidget extends StatefulWidget {
     super.key,
     required this.onNext,
     required this.onPrev,
+    required this.name,
+    required this.content,
+    required this.image,
   });
 
   final VoidCallback onPrev;
   final VoidCallback onNext;
+  final String name;
+  final String content;
+  final String image;
 
   @override
   State<AppContentWidget> createState() => _AppContentWidgetState();
@@ -26,8 +32,7 @@ class _AppContentWidgetState extends State<AppContentWidget> {
   @override
   void initState() {
     super.initState();
-    _controller = VideoPlayerController.networkUrl(Uri.parse(
-        "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4"))
+    _controller = VideoPlayerController.networkUrl(Uri.parse(widget.content))
       ..initialize().then((_) {
         _controller.play();
         setState(() {});
@@ -67,7 +72,7 @@ class _AppContentWidgetState extends State<AppContentWidget> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Image.network(
-            "https://static-00.iconduck.com/assets.00/netflix-icon-icon-2048x2048-yj41gpvr.png",
+            widget.image,
             width: 80,
           ),
           const SizedBox(width: 12),
@@ -79,7 +84,7 @@ class _AppContentWidgetState extends State<AppContentWidget> {
                 style: TextStyle(fontSize: bodyfontsize),
               ),
               Text(
-                "Netflix",
+                widget.name,
                 style: TextStyle(
                   fontSize: subheadingFontSize,
                   fontWeight: FontWeight.bold,
@@ -118,25 +123,16 @@ class _AppContentWidgetState extends State<AppContentWidget> {
   }
 
   Widget _buildSeekBar() {
-    return SliderTheme(
-      data: SliderThemeData(
-        trackHeight: 4,
-        thumbColor: Theme.of(context).primaryColor,
-        activeTrackColor: Theme.of(context).primaryColor,
-        thumbShape: const RoundSliderThumbShape(enabledThumbRadius: 8),
-        overlayShape: const RoundSliderOverlayShape(overlayRadius: 16),
-      ),
-      child: Slider(
-        value: _currentPosition,
-        min: 0.0,
-        max: _controller.value.duration.inSeconds.toDouble(),
-        onChanged: (value) {
-          setState(() {
-            _controller.seekTo(Duration(seconds: value.toInt()));
-            _currentPosition = value;
-          });
-        },
-      ),
+    return Slider(
+      value: _currentPosition,
+      min: 0.0,
+      max: _controller.value.duration.inSeconds.toDouble(),
+      onChanged: (value) {
+        setState(() {
+          _controller.seekTo(Duration(seconds: value.toInt()));
+          _currentPosition = value;
+        });
+      },
     );
   }
 }
