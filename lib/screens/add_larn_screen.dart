@@ -36,7 +36,7 @@ class TopNavigation extends StatelessWidget {
     double subHeadingFontSize =
         Provider.of<SettingStore>(context).subHeadingFontSize;
 
-    return Container(
+    return Ink(
       padding: const EdgeInsets.only(top: 48),
       decoration: const BoxDecoration(
         color: Colors.white,

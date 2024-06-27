@@ -45,73 +45,48 @@ class MediaBubbleWidget extends StatelessWidget {
           child: Stack(
             clipBehavior: Clip.none,
             children: [
-              Positioned(
-                left: isLeftSide ? -3 : null,
-                top: 6,
-                right: isLeftSide ? null : 8,
-                child: Transform.rotate(
-                  angle: 40,
-                  child: Container(
-                    width: 24,
-                    height: 32,
-                    decoration: const BoxDecoration(
-                      color: Colors.black,
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(4.0),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
               Container(
-                margin: EdgeInsets.only(
-                  right: isLeftSide ? 32 : 12,
-                ),
-                padding: const EdgeInsets.all(10.0),
-                decoration: BoxDecoration(
+                width: 300,
+                height: 400,
+                clipBehavior: Clip.antiAlias,
+                decoration: const BoxDecoration(
                   color: Colors.white,
-                  borderRadius: BorderRadius.circular(10.0),
-                  border: Border.all(
-                    width: 1,
-                    color: Colors.black,
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(12.0),
                   ),
                 ),
-                child: SizedBox(
-                  width: 300,
-                  height: 400,
-                  child: Image.network(
-                    src,
-                    fit: BoxFit.cover,
-                    loadingBuilder: (context, child, loadingProgress) =>
-                        loadingProgress == null
-                            ? child
-                            : const SizedBox(
-                                width: 400,
-                                height: 300,
-                                child: Center(
-                                  child: CircularProgressIndicator(),
-                                ),
+                child: Image.network(
+                  src,
+                  fit: BoxFit.cover,
+                  loadingBuilder: (context, child, loadingProgress) =>
+                      loadingProgress == null
+                          ? child
+                          : const SizedBox(
+                              width: 400,
+                              height: 300,
+                              child: Center(
+                                child: CircularProgressIndicator(),
                               ),
-                    errorBuilder: (context, error, stackTrace) => SizedBox(
-                      width: 400,
-                      height: 400,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          const FaIcon(
-                            FontAwesomeIcons.triangleExclamation,
-                            color: Colors.red,
-                          ),
-                          const SizedBox(height: 20),
-                          Text(
-                            "เกิดข้อผิดพลาดในการโหลดมีเดีย",
-                            style: TextStyle(
-                              fontSize: bodyFontSize,
                             ),
+                  errorBuilder: (context, error, stackTrace) => SizedBox(
+                    width: 400,
+                    height: 400,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        const FaIcon(
+                          FontAwesomeIcons.triangleExclamation,
+                          color: Colors.red,
+                        ),
+                        const SizedBox(height: 20),
+                        Text(
+                          "เกิดข้อผิดพลาดในการโหลดมีเดีย",
+                          style: TextStyle(
+                            fontSize: bodyFontSize,
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ),
                 ),

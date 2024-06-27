@@ -195,6 +195,9 @@ class FontSizeWidget extends StatelessWidget {
     }
 
     return InkWell(
+      borderRadius: const BorderRadius.all(
+        Radius.circular(10.0),
+      ),
       onTap: () => Provider.of<SettingStore>(context, listen: false)
           .setFontSize(fontSize),
       splashColor: isActive ? primaryColor.withOpacity(0.8) : Colors.black12,

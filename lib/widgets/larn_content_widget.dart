@@ -23,6 +23,8 @@ class LarnContentWidget extends StatelessWidget {
         Provider.of<SettingStore>(context).subHeadingFontSize;
 
     return HomeContentWidget(
+      isVolumeOn: false,
+      onVolumeToggle: () {},
       onNext: onNext,
       onPrev: onPrev,
       topLeft: Row(

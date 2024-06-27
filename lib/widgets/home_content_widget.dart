@@ -11,6 +11,8 @@ class HomeContentWidget extends StatelessWidget {
     required this.content,
     required this.onNext,
     required this.onPrev,
+    required this.isVolumeOn,
+    required this.onVolumeToggle,
   });
 
   final Widget topLeft;
@@ -18,6 +20,9 @@ class HomeContentWidget extends StatelessWidget {
 
   final VoidCallback onNext;
   final VoidCallback onPrev;
+  final VoidCallback onVolumeToggle;
+
+  final bool isVolumeOn;
 
   @override
   Widget build(BuildContext context) {
@@ -33,6 +38,7 @@ class HomeContentWidget extends StatelessWidget {
           borderRadius: BorderRadius.circular(10),
         ),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Padding(
@@ -42,17 +48,10 @@ class HomeContentWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   topLeft,
-                  Column(
-                    children: [
-                      const FaIcon(FontAwesomeIcons.volumeHigh),
-                      const SizedBox(height: 12),
-                      Text(
-                        "เปิด/ปิดเสียง",
-                        style: TextStyle(
-                          fontSize: bodyfontsize,
-                        ),
-                      ),
-                    ],
+                  VolumeControlWidget(
+                    bodyfontsize: bodyfontsize,
+                    isVolumeOn: isVolumeOn,
+                    onVolumeToggle: onVolumeToggle,
                   )
                 ],
               ),
@@ -81,21 +80,54 @@ class HomeContentWidget extends StatelessWidget {
                   Flexible(
                     flex: 1,
                     child: ContentControlWidget(
-                        border: const Border(
-                          top: BorderSide(color: Colors.grey),
-                        ),
-                        borderRadius: const BorderRadius.only(
-                          bottomLeft: Radius.circular(10),
-                          bottomRight: Radius.circular(10),
-                        ),
-                        onTap: onNext,
-                        title: "ถัดไป"),
+                      border: const Border(
+                        top: BorderSide(color: Colors.grey),
+                      ),
+                      borderRadius: const BorderRadius.only(
+                        bottomLeft: Radius.circular(10),
+                        bottomRight: Radius.circular(10),
+                      ),
+                      onTap: onNext,
+                      title: "ถัดไป",
+                    ),
                   ),
                 ],
               ),
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class VolumeControlWidget extends StatelessWidget {
+  const VolumeControlWidget({
+    super.key,
+    required this.bodyfontsize,
+    required this.isVolumeOn,
+    required this.onVolumeToggle,
+  });
+
+  final double bodyfontsize;
+  final bool isVolumeOn;
+  final VoidCallback onVolumeToggle;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onVolumeToggle,
+      child: Column(
+        children: [
+          const FaIcon(FontAwesomeIcons.volumeHigh),
+          const SizedBox(height: 12),
+          Text(
+            "${isVolumeOn ? "ปิด" : "เปิด"}เสียง",
+            style: TextStyle(
+              fontSize: bodyfontsize,
+            ),
+          ),
+        ],
       ),
     );
   }
