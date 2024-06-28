@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:larn/store/settings_store.dart';
 import 'package:larn/widgets/home_content_widget.dart';
 import 'package:provider/provider.dart';
@@ -60,6 +61,17 @@ class _AppContentWidgetState extends State<AppContentWidget> {
 
     bool isVideoLoaded = _controller.value.isInitialized;
 
+    bool isPlaying = _controller.value.isPlaying;
+
+    void handleOnTap() {
+      if (_controller.value.isPlaying) {
+        _controller.pause();
+      } else {
+        _controller.play();
+      }
+      setState(() {});
+    }
+
     return HomeContentWidget(
       onNext: widget.onNext,
       onPrev: widget.onPrev,
@@ -106,10 +118,6 @@ class _AppContentWidgetState extends State<AppContentWidget> {
                         aspectRatio: _controller.value.aspectRatio,
                         child: VideoPlayer(_controller),
                       ),
-                      Transform.translate(
-                        offset: const Offset(0, -24),
-                        child: _buildSeekBar(),
-                      ),
                     ],
                   ),
                 )
@@ -117,6 +125,63 @@ class _AppContentWidgetState extends State<AppContentWidget> {
                   alignment: Alignment.center,
                   child: CircularProgressIndicator(),
                 ),
+          Visibility(
+            visible: isVideoLoaded,
+            child: Positioned.fill(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Stack(
+                    children: [
+                      GestureDetector(
+                        onTap: handleOnTap,
+                        child: AspectRatio(
+                          aspectRatio: _controller.value.aspectRatio,
+                          child: Container(
+                            color: isPlaying
+                                ? Colors.transparent
+                                : Colors.black.withOpacity(0.5),
+                          ),
+                        ),
+                      ),
+                      Visibility(
+                        visible: isVideoLoaded,
+                        child: Positioned(
+                          bottom: 0,
+                          left: 0,
+                          right: 0,
+                          child: Align(
+                            alignment: Alignment.bottomCenter,
+                            child: _buildSeekBar(),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
+          Visibility(
+            visible: !isPlaying,
+            child: const Positioned.fill(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      FaIcon(
+                        FontAwesomeIcons.play,
+                        size: 32,
+                        color: Colors.white,
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
         ],
       ),
     );

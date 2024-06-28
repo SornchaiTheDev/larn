@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:larn/model/larn.dart';
+import 'package:larn/models/larn.dart';
 import 'package:larn/store/settings_store.dart';
 import 'package:larn/widgets/apps_icon_widget.dart';
 import 'package:provider/provider.dart';

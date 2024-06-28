@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:larn/model/larn.dart';
+import 'package:larn/models/larn.dart';
 
 class LarnStore with ChangeNotifier {
   final List<Larn> _larnList = [

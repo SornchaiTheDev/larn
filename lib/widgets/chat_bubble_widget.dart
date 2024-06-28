@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:larn/constants/bubble.dart';
 import 'package:larn/store/settings_store.dart';
 import 'package:provider/provider.dart';
@@ -21,6 +22,8 @@ class ChatBubbleWidget extends StatelessWidget {
     double bodyFontSize = Provider.of<SettingStore>(context).bodyFontSize;
 
     return Row(
+      mainAxisAlignment:
+          isLeftSide ? MainAxisAlignment.start : MainAxisAlignment.end,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Visibility(
@@ -48,7 +51,7 @@ class ChatBubbleWidget extends StatelessWidget {
             children: [
               Positioned(
                 left: isLeftSide ? -3 : null,
-                top: 6,
+                top: isLeftSide ? 6 : 2,
                 right: isLeftSide ? null : 8,
                 child: Transform.rotate(
                   angle: 40,
@@ -77,10 +80,14 @@ class ChatBubbleWidget extends StatelessWidget {
                     color: Colors.black,
                   ),
                 ),
-                child: Text(
-                  text,
-                  style: TextStyle(
-                    fontSize: bodyFontSize,
+                child: MarkdownBody(
+                  data: text,
+                  selectable: true,
+                  styleSheet:
+                      MarkdownStyleSheet.fromTheme(Theme.of(context)).copyWith(
+                    p: TextStyle(
+                      fontSize: bodyFontSize,
+                    ),
                   ),
                 ),
               ),

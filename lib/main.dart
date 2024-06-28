@@ -8,6 +8,7 @@ import 'package:larn/screens/chat_other_screen.dart';
 import 'package:larn/screens/chat_screen.dart';
 import 'package:larn/screens/chats_screen.dart';
 import 'package:larn/screens/settings_screen.dart';
+import 'package:larn/services/chat_service.dart';
 import 'package:larn/store/larn_store.dart';
 import 'package:larn/store/settings_store.dart';
 import 'package:provider/provider.dart';
@@ -18,7 +19,10 @@ void main() {
       create: (context) => SettingStore(),
       child: ChangeNotifierProvider(
         create: (context) => LarnStore(),
-        child: const App(),
+        child: ChangeNotifierProvider(
+          create: (context) => ChatService(),
+          child: const App(),
+        ),
       ),
     ),
   );

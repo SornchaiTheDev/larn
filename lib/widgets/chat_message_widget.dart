@@ -4,24 +4,27 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 class ChatMessageWidget extends StatefulWidget {
   const ChatMessageWidget({
     super.key,
+    required this.textController,
+    required this.onSend,
   });
+
+  final TextEditingController textController;
+  final VoidCallback onSend;
 
   @override
   State<ChatMessageWidget> createState() => _ChatMessageWidgetState();
 }
 
 class _ChatMessageWidgetState extends State<ChatMessageWidget> {
-  TextEditingController textController = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
-    bool isNotEmpty = textController.text.isNotEmpty;
+    bool isNotEmpty = widget.textController.text.isNotEmpty;
     return Row(
       children: [
         Expanded(
           child: TextField(
             onChanged: (value) => setState(() {}),
-            controller: textController,
+            controller: widget.textController,
             decoration: const InputDecoration(
               hintText: 'Enter text',
               border: OutlineInputBorder(
@@ -45,10 +48,7 @@ class _ChatMessageWidgetState extends State<ChatMessageWidget> {
           ),
         ),
         IconButton(
-          onPressed: () {
-            setState(() {});
-            print(textController.text);
-          },
+          onPressed: widget.onSend,
           icon: isNotEmpty
               ? const FaIcon(FontAwesomeIcons.paperPlane)
               : const FaIcon(FontAwesomeIcons.microphone),

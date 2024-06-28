@@ -52,10 +52,10 @@ class CallLarnScreen extends StatelessWidget {
                       Expanded(
                         child: ListView(),
                       ),
-                      const Padding(
-                        padding: EdgeInsets.fromLTRB(10, 0, 10, 14),
-                        child: ChatMessageWidget(),
-                      ),
+                      // const Padding(
+                      //   padding: EdgeInsets.fromLTRB(10, 0, 10, 14),
+                      //   child: ChatMessageWidget(textController: ,),
+                      // ),
                     ],
                   ),
                 ),
