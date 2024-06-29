@@ -12,4 +12,14 @@ class Larn {
     required this.image,
     this.appList,
   });
+
+  factory Larn.fromJson(Map<String, dynamic> json) {
+    return Larn(
+      id: json['_id'],
+      name: json['name'],
+      description: json['description'],
+      image: json['image_url'],
+      appList: List<String>.from([]),
+    );
+  }
 }

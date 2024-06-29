@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:larn/models/larn.dart';
+import 'package:larn/services/larn_service.dart';
 import 'package:larn/store/larn_store.dart';
 import 'package:larn/store/settings_store.dart';
 import 'package:larn/widgets/larn_widget.dart';
@@ -16,12 +17,14 @@ class ChatsScreen extends StatefulWidget {
 
 class _ChatsScreenState extends State<ChatsScreen> {
   final TextEditingController controller = TextEditingController();
+  late LarnService larnService;
 
   @override
   void initState() {
     controller.addListener(() {
       setState(() {});
     });
+    larnService = LarnService();
     super.initState();
   }
 

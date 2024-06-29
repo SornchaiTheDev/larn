@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:larn/models/larn.dart';
 import 'package:larn/store/settings_store.dart';
 import 'package:larn/widgets/apps_icon_widget.dart';
@@ -15,7 +14,7 @@ class LarnWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Larn(:name, :description, :image, :id, :appList) = larn;
+    final Larn(:name, :description, :image, :appList) = larn;
 
     double bodyFontSize = Provider.of<SettingStore>(context).bodyFontSize;
     double subHeadingFontSize =
@@ -32,7 +31,7 @@ class LarnWidget extends StatelessWidget {
           children: [
             CircleAvatar(
               radius: 30,
-              backgroundImage: AssetImage(image),
+              backgroundImage: NetworkImage(image),
             ),
             const SizedBox(width: 12),
             Expanded(

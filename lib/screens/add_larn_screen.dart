@@ -1,11 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:larn/services/larn_service.dart';
+import 'package:larn/store/larn_store.dart';
 import 'package:larn/store/settings_store.dart';
 import 'package:larn/widgets/add_larn_widget.dart';
 import 'package:larn/widgets/back_button_widget.dart';
 import 'package:provider/provider.dart';
 
-class AddLarnScreen extends StatelessWidget {
+class AddLarnScreen extends StatefulWidget {
   const AddLarnScreen({super.key});
+
+  @override
+  State<AddLarnScreen> createState() => _AddLarnScreenState();
+}
+
+class _AddLarnScreenState extends State<AddLarnScreen> {
+  late LarnService larnService;
+
+  @override
+  void initState() {
+    larnService = LarnService();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -14,10 +29,22 @@ class AddLarnScreen extends StatelessWidget {
         children: [
           const TopNavigation(),
           Expanded(
-            child: ListView.builder(
-              padding: const EdgeInsets.fromLTRB(0, 20, 0, 40),
-              itemCount: 10,
-              itemBuilder: (context, index) => const AddLarnWidget(),
+            child: FutureBuilder(
+              future: larnService.getLarns(),
+              builder: (context, larnLists) {
+                if (larnLists.connectionState == ConnectionState.waiting) {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }
+                return ListView.builder(
+                  padding: const EdgeInsets.fromLTRB(0, 20, 0, 40),
+                  itemCount: larnLists.data?.length,
+                  itemBuilder: (context, index) => AddLarnWidget(
+                    larn: larnLists.data!.elementAt(index),
+                  ),
+                );
+              },
             ),
           ),
         ],
