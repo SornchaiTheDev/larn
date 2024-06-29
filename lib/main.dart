@@ -9,6 +9,7 @@ import 'package:larn/screens/chat_screen.dart';
 import 'package:larn/screens/chats_screen.dart';
 import 'package:larn/screens/settings_screen.dart';
 import 'package:larn/services/chat_service.dart';
+import 'package:larn/store/chat_history_store.dart';
 import 'package:larn/store/larn_store.dart';
 import 'package:larn/store/settings_store.dart';
 import 'package:provider/provider.dart';
@@ -20,7 +21,7 @@ void main() {
       child: ChangeNotifierProvider(
         create: (context) => LarnStore(),
         child: ChangeNotifierProvider(
-          create: (context) => ChatService(),
+          create: (context) => ChatHistoryStore(),
           child: const App(),
         ),
       ),
@@ -53,7 +54,10 @@ class App extends StatelessWidget {
       routes: {
         '/': (context) => const BottomNavigationScreen(),
         '/chats': (context) => const ChatsScreen(),
-        '/chat': (context) => const ChatScreen(),
+        '/chat': (context) => ChangeNotifierProvider(
+              create: (context) => ChatService(),
+              child: const ChatScreen(),
+            ),
         "/add-larn": (context) => const AddLarnScreen(),
         "/settings": (context) => const SettingsScreen(),
         "/call": (context) => const CallScreen(),

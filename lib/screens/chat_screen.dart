@@ -19,13 +19,50 @@ class ChatScreen extends StatefulWidget {
 
 class _ChatScreenState extends State<ChatScreen> {
   final TextEditingController textController = TextEditingController();
+  late ScrollController _scrollController;
+
+  void _scrollToBottom() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (_scrollController.hasClients) {
+        _scrollController.jumpTo(
+          _scrollController.position.maxScrollExtent,
+        );
+      }
+    });
+  }
+
+  @override
+  void initState() {
+    _scrollController = ScrollController();
+    _scrollToBottom();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     final Larn larn = ModalRoute.of(context)!.settings.arguments as Larn;
-    final Larn(:name, :image) = larn;
-    ChatService chatService = Provider.of<ChatService>(context, listen: true);
-    List<Chat> chats = chatService.chats;
+    final Larn(:name, :image, :id) = larn;
+
+    final ChatService chatService = Provider.of<ChatService>(
+      context,
+      listen: true,
+    );
+
+    final List<Chat> chats = Provider.of<ChatService>(
+      context,
+      listen: true,
+    ).chats;
+
+    chatService.config(
+      context,
+      larnId: id,
+      onReceived: _scrollToBottom,
+    );
 
     double subHeadingFontSize =
         Provider.of<SettingStore>(context).subHeadingFontSize;
@@ -35,6 +72,7 @@ class _ChatScreenState extends State<ChatScreen> {
     void sendMessage() {
       chatService.sendMessage(textController.text);
       textController.clear();
+      _scrollToBottom();
     }
 
     return Scaffold(
@@ -45,6 +83,7 @@ class _ChatScreenState extends State<ChatScreen> {
             child: Padding(
               padding: const EdgeInsets.fromLTRB(12.0, 0, 12.0, 0),
               child: ListView.builder(
+                controller: _scrollController,
                 padding: const EdgeInsets.fromLTRB(0, 40, 0, 10),
                 itemCount: chats.length,
                 itemBuilder: (context, index) {
