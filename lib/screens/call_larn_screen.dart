@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:larn/store/settings_store.dart';
-import 'package:larn/widgets/chat_message_widget.dart';
 import 'package:provider/provider.dart';
 
 class CallLarnScreen extends StatelessWidget {

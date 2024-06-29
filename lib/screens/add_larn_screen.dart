@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:larn/services/larn_service.dart';
-import 'package:larn/store/larn_store.dart';
 import 'package:larn/store/settings_store.dart';
 import 'package:larn/widgets/add_larn_widget.dart';
 import 'package:larn/widgets/back_button_widget.dart';
