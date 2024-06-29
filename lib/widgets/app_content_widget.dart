@@ -106,83 +106,86 @@ class _AppContentWidgetState extends State<AppContentWidget> {
           )
         ],
       ),
-      content: Stack(
-        children: [
-          isVideoLoaded
-              ? Align(
-                  alignment: Alignment.center,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      AspectRatio(
-                        aspectRatio: _controller.value.aspectRatio,
-                        child: VideoPlayer(_controller),
-                      ),
-                    ],
-                  ),
-                )
-              : const Align(
-                  alignment: Alignment.center,
-                  child: CircularProgressIndicator(),
-                ),
-          Visibility(
-            visible: isVideoLoaded,
-            child: Positioned.fill(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Stack(
-                    children: [
-                      GestureDetector(
-                        onTap: handleOnTap,
-                        child: AspectRatio(
+      content: SizedBox(
+        width: 340,
+        child: Stack(
+          children: [
+            isVideoLoaded
+                ? Align(
+                    alignment: Alignment.center,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        AspectRatio(
                           aspectRatio: _controller.value.aspectRatio,
-                          child: Container(
-                            color: isPlaying
-                                ? Colors.transparent
-                                : Colors.black.withOpacity(0.5),
+                          child: VideoPlayer(_controller),
+                        ),
+                      ],
+                    ),
+                  )
+                : const Align(
+                    alignment: Alignment.center,
+                    child: CircularProgressIndicator(),
+                  ),
+            Visibility(
+              visible: isVideoLoaded,
+              child: Positioned.fill(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Stack(
+                      children: [
+                        GestureDetector(
+                          onTap: handleOnTap,
+                          child: AspectRatio(
+                            aspectRatio: _controller.value.aspectRatio,
+                            child: Container(
+                              color: isPlaying
+                                  ? Colors.transparent
+                                  : Colors.black.withOpacity(0.5),
+                            ),
                           ),
                         ),
-                      ),
-                      Visibility(
-                        visible: isVideoLoaded,
-                        child: Positioned(
-                          bottom: 0,
-                          left: 0,
-                          right: 0,
-                          child: Align(
-                            alignment: Alignment.bottomCenter,
-                            child: _buildSeekBar(),
+                        Visibility(
+                          visible: isVideoLoaded,
+                          child: Positioned(
+                            bottom: 0,
+                            left: 0,
+                            right: 0,
+                            child: Align(
+                              alignment: Alignment.bottomCenter,
+                              child: _buildSeekBar(),
+                            ),
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-                ],
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
-          ),
-          Visibility(
-            visible: !isPlaying,
-            child: const Positioned.fill(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      FaIcon(
-                        FontAwesomeIcons.play,
-                        size: 32,
-                        color: Colors.white,
-                      ),
-                    ],
-                  ),
-                ],
+            Visibility(
+              visible: !isPlaying,
+              child: const Positioned.fill(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        FaIcon(
+                          FontAwesomeIcons.play,
+                          size: 32,
+                          color: Colors.white,
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

@@ -38,7 +38,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       onPrev: () => setState(() => currentContent++),
                       name: "Netflix",
                       content:
-                          "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+                          "https://videos.pexels.com/video-files/8819026/8819026-hd_1080_1080_25fps.mp4",
                       image:
                           "https://static-00.iconduck.com/assets.00/netflix-icon-icon-2048x2048-yj41gpvr.png",
                     )
