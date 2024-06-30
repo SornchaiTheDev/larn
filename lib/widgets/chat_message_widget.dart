@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
+import 'package:speech_to_text/speech_to_text_provider.dart';
 
 class ChatMessageWidget extends StatefulWidget {
   const ChatMessageWidget({
@@ -18,12 +20,33 @@ class ChatMessageWidget extends StatefulWidget {
 class _ChatMessageWidgetState extends State<ChatMessageWidget> {
   @override
   Widget build(BuildContext context) {
+    var speechProvider =
+        Provider.of<SpeechToTextProvider>(context, listen: true);
+
     bool isNotEmpty = widget.textController.text.isNotEmpty;
+
+    void handleOnAction() {
+      if (isNotEmpty) {
+        widget.onSend();
+      } else {
+        if (!speechProvider.isAvailable) return;
+
+        if (!speechProvider.isListening) {
+          speechProvider.listen(
+            partialResults: true,
+            localeId: "th-TH",
+          );
+        } else {
+          speechProvider.cancel();
+        }
+      }
+    }
+
     return Row(
       children: [
         Expanded(
           child: TextField(
-            onChanged: (value) => setState(() {}),
+            // onChanged: (value) => setState(() {}),
             controller: widget.textController,
             decoration: const InputDecoration(
               hintText: 'Enter text',
@@ -48,10 +71,19 @@ class _ChatMessageWidgetState extends State<ChatMessageWidget> {
           ),
         ),
         IconButton(
-          onPressed: widget.onSend,
+          onPressed: handleOnAction,
           icon: isNotEmpty
               ? const FaIcon(FontAwesomeIcons.paperPlane)
-              : const FaIcon(FontAwesomeIcons.microphone),
+              : FaIcon(
+                  speechProvider.isAvailable
+                      ? FontAwesomeIcons.microphone
+                      : FontAwesomeIcons.microphoneSlash,
+                  color: !speechProvider.isAvailable
+                      ? Colors.red
+                      : speechProvider.isListening
+                          ? Theme.of(context).primaryColor
+                          : Colors.black,
+                ),
         ),
       ],
     );
