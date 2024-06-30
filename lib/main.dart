@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:larn/constants/font_size.dart';
-import 'package:larn/constants/theme.dart';
 import 'package:larn/screens/add_larn_screen.dart';
 import 'package:larn/screens/bottom_navigation_screen.dart';
 import 'package:larn/screens/call_larn_screen.dart';
@@ -17,13 +15,6 @@ import 'package:larn/store/larn_store.dart';
 import 'package:larn/store/settings_store.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-void init(BuildContext context) async {
-  var _fontSize = FontSize.medium;
-  var _theme = AppTheme.green;
-
-  Provider.of<SettingStore>(context, listen: false).setFontSize(_fontSize);
-}
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
