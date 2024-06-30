@@ -83,24 +83,21 @@ class SettingsScreen extends StatelessWidget {
                     const SizedBox(
                       height: 14,
                     ),
-                    const Row(
-                      children: [
-                        ColorPaletteWidget(
-                          theme: greenTheme,
-                        ),
-                        SizedBox(
-                          width: 20,
-                        ),
-                        ColorPaletteWidget(
-                          theme: amberTheme,
-                        ),
-                        SizedBox(
-                          width: 20,
-                        ),
-                        ColorPaletteWidget(
-                          theme: purpleTheme,
-                        ),
-                      ],
+                    Row(
+                      children: themes.map(
+                        (theme) {
+                          return Row(
+                            children: [
+                              ColorPaletteWidget(
+                                theme: theme,
+                              ),
+                              const SizedBox(
+                                width: 20,
+                              ),
+                            ],
+                          );
+                        },
+                      ).toList(),
                     ),
                   ],
                 ),
@@ -113,27 +110,26 @@ class SettingsScreen extends StatelessWidget {
   }
 }
 
-typedef AppTheme = Map<String, Color>;
-
 class ColorPaletteWidget extends StatelessWidget {
   const ColorPaletteWidget({
     super.key,
     required this.theme,
   });
 
-  final AppTheme theme;
+  final ({AppTheme name, Color color}) theme;
 
   final double boxSize = 46.0;
 
   @override
   Widget build(BuildContext context) {
     Color primaryColor = Theme.of(context).primaryColor;
-    bool isActive = Provider.of<SettingStore>(context).theme == theme;
+    bool isActive =
+        Provider.of<SettingStore>(context).primaryColor == theme.color;
 
     return InkWell(
       borderRadius: const BorderRadius.all(Radius.circular(10.0)),
-      onTap: () =>
-          Provider.of<SettingStore>(context, listen: false).setTheme(theme),
+      onTap: () => Provider.of<SettingStore>(context, listen: false)
+          .setTheme(theme.name),
       child: Row(
         children: [
           Container(
@@ -156,7 +152,7 @@ class ColorPaletteWidget extends StatelessWidget {
                 Container(
                   width: boxSize,
                   height: boxSize,
-                  color: theme["primary"],
+                  color: theme.color,
                 ),
               ],
             ),

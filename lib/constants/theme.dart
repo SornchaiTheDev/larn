@@ -1,15 +1,26 @@
 import 'dart:ui';
 
-typedef AppTheme = Map<String, Color>;
+enum AppTheme {
+  green,
+  amber,
+  purple,
+}
 
-const AppTheme greenTheme = {
-  'primary': Color(0xFFBDDF19),
-};
-
-const AppTheme amberTheme = {
-  'primary': Color(0xFFFFC107),
-};
-
-const AppTheme purpleTheme = {
-  'primary': Color(0xFF9C27B0),
-};
+const List<
+    ({
+      AppTheme name,
+      Color color,
+    })> themes = [
+  (
+    name: AppTheme.green,
+    color: Color(0xFFBDDF19),
+  ),
+  (
+    name: AppTheme.amber,
+    color: Color(0xFFFFC107),
+  ),
+  (
+    name: AppTheme.purple,
+    color: Color(0xFF9C27B0),
+  ),
+];

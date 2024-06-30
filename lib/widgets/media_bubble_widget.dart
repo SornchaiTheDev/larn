@@ -28,7 +28,7 @@ class MediaBubbleWidget extends StatelessWidget {
           visible: side == BubbleSide.left,
           child: CircleAvatar(
             radius: 20,
-            backgroundImage: AssetImage(image),
+            backgroundImage: NetworkImage(image),
           ),
         ),
         const SizedBox(
