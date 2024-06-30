@@ -15,7 +15,7 @@ class Larn {
 
   factory Larn.fromJson(Map<String, dynamic> json) {
     return Larn(
-      id: json['_id'],
+      id: json['id'],
       name: json['name'],
       description: json['description'],
       image: json['image_url'],

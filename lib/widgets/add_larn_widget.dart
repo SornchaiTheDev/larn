@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:larn/models/larn.dart';
+import 'package:larn/services/db_service.dart';
 import 'package:larn/store/larn_store.dart';
 import 'package:larn/store/settings_store.dart';
 import 'package:larn/widgets/apps_icon_widget.dart';
@@ -29,6 +30,21 @@ class _AddLarnWidgetState extends State<AddLarnWidget> {
     double bodyFontSize = Provider.of<SettingStore>(context).bodyFontSize;
     double subHeadingFontSize =
         Provider.of<SettingStore>(context).subHeadingFontSize;
+
+    void handleAddLarn() {
+      if (larnStore.isExist(id)) {
+        larnStore.removeLarn(widget.larn.id);
+        db?.delete("larns", where: 'id = ?', whereArgs: [widget.larn.id]);
+      } else {
+        larnStore.addLarn(widget.larn);
+        db?.insert("larns", {
+          "id": widget.larn.id,
+          "name": widget.larn.name,
+          "description": widget.larn.description,
+          "image": widget.larn.image,
+        });
+      }
+    }
 
     return SizedBox(
       width: double.infinity,
@@ -109,13 +125,7 @@ class _AddLarnWidgetState extends State<AddLarnWidget> {
                       primaryColor: primaryColor,
                       bodyFontSize: bodyFontSize,
                       isExist: larnStore.isExist(id),
-                      onTap: () {
-                        if (larnStore.isExist(id)) {
-                          larnStore.removeLarn(widget.larn.id);
-                        } else {
-                          larnStore.addLarn(widget.larn);
-                        }
-                      },
+                      onTap: handleAddLarn,
                     )
                   ],
                 ),

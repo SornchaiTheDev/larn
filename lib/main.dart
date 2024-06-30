@@ -31,7 +31,7 @@ void main() async {
       child: ChangeNotifierProvider(
         create: (context) => LarnStore(),
         child: ChangeNotifierProvider(
-          create: (context) => ChatHistoryStore(),
+          create: (context) => ChatHistoryStore(context),
           child: const App(),
         ),
       ),
@@ -65,7 +65,7 @@ class App extends StatelessWidget {
         '/': (context) => const BottomNavigationScreen(),
         '/chats': (context) => const ChatsScreen(),
         '/chat': (context) => ChangeNotifierProvider(
-              create: (context) => ChatService(),
+              create: (context) => ChatService(context),
               child: const ChatScreen(),
             ),
         "/add-larn": (context) => const AddLarnScreen(),

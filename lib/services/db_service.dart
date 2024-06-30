@@ -26,6 +26,8 @@ class DbService {
   Future<void> initDB() async {
     String path = await getDBPath();
 
+    // deleteDatabase(path);
+
     db = await openDatabase(path, version: 1,
         onCreate: (Database db, int version) async {
       await db.execute(
@@ -33,7 +35,8 @@ class DbService {
       await db.execute(
           'CREATE TABLE apps (id VARCHAR PRIMARY KEY, name VARCHAR, description TEXT, image VARCHAR, larn_id VARCHAR, FOREIGN KEY(larn_id) REFERENCES larns(id))');
       await db.execute(
-          'CREATE TABLE user_preferences (id INTGER PRIMARY KEY, font_size INT, theme VARCHAR)');
+        'CREATE TABLE chat_histories (id INTEGER PRIMARY KEY AUTOINCREMENT, type VARCHAR, content TEXT, timestamp DATETIME, side VARCHAR, larn_id VARCHAR, FOREIGN KEY(larn_id) REFERENCES larns(id))',
+      );
     });
   }
 }

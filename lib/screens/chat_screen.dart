@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:larn/models/chat.dart';
 import 'package:larn/models/larn.dart';
 import 'package:larn/services/chat_service.dart';
+import 'package:larn/store/chat_history_store.dart';
 import 'package:larn/store/settings_store.dart';
 import 'package:larn/widgets/back_button_widget.dart';
 import 'package:larn/widgets/chat_bubble_widget.dart';
@@ -50,16 +51,15 @@ class _ChatScreenState extends State<ChatScreen> {
 
     final ChatService chatService = Provider.of<ChatService>(
       context,
-      listen: true,
+      listen: false,
     );
 
-    final List<Chat> chats = Provider.of<ChatService>(
+    final List<Chat> chats = Provider.of<ChatHistoryStore>(
       context,
       listen: true,
-    ).chats;
+    ).getHistory(id);
 
     chatService.config(
-      context,
       larnId: id,
       onReceived: _scrollToBottom,
     );

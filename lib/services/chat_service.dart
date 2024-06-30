@@ -2,21 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:larn/constants/bubble.dart';
 import 'package:larn/models/chat.dart';
+import 'package:larn/services/db_service.dart';
 import 'package:larn/store/chat_history_store.dart';
+import 'package:provider/provider.dart';
 import 'package:socket_io_client/socket_io_client.dart' as io;
 
 class ChatService with ChangeNotifier {
   late io.Socket socket;
-  late BuildContext context;
   late VoidCallback onReceived;
   bool isTyping = false;
   String larnId = "";
-  List<Chat> chats = [];
-  final ChatHistoryStore chatHistory = ChatHistoryStore().getInstance();
+  final BuildContext context;
+  late ChatHistoryStore chatHistory;
 
-  ChatService() {
+  ChatService(this.context) {
     initSocketIO();
-    chats = chatHistory.getHistory(larnId);
+    chatHistory = Provider.of<ChatHistoryStore>(context, listen: false);
     notifyListeners();
   }
 
@@ -26,30 +27,39 @@ class ChatService with ChangeNotifier {
     socket.dispose();
   }
 
-  void config(
-    BuildContext context, {
+  void config({
     required String larnId,
     required VoidCallback onReceived,
   }) {
     this.larnId = larnId;
-    this.context = context;
     this.onReceived = onReceived;
   }
 
   void sendMessage(String message) {
     Chat currentMessage = Chat(
-      name: "Test",
       image: "assets/images/larn1.png",
       type: ChatType.text,
       content: message,
       timestamp: DateTime.now(),
       side: BubbleSide.right,
     );
-    chats.add(currentMessage);
 
     notifyListeners();
     chatHistory.addHistory(larnId, currentMessage);
+    insertToDb(currentMessage);
     socket.emit("message", message);
+  }
+
+  void insertToDb(Chat message) {
+    final Chat(:type, :content, :timestamp, :side) = message;
+
+    db?.insert("chat_histories", {
+      "larn_id": larnId,
+      "type": type.toString().split('.').last,
+      "content": content,
+      "timestamp": timestamp.toIso8601String(),
+      "side": side.toString().split('.').last,
+    });
   }
 
   void initSocketIO() {
@@ -64,7 +74,6 @@ class ChatService with ChangeNotifier {
 
     socket.on("response", (data) {
       final currentChat = Chat(
-        name: "Test",
         image: "assets/images/larn1.png",
         type: ChatType.text,
         content: data,
@@ -77,7 +86,8 @@ class ChatService with ChangeNotifier {
         currentChat,
       );
 
-      chats.add(currentChat);
+      insertToDb(currentChat);
+
       onReceived();
       notifyListeners();
     });
